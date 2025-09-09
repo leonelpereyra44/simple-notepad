@@ -115,164 +115,136 @@
     const editor = document.getElementById('editor');
     const saveBtn = document.getElementById('saveBtn');
     const openBtn = document.getElementById('openBtn');
-    const fileInput = document.getElementById('fileInput');
     const newBtn = document.getElementById('newBtn');
     const renameBtn = document.getElementById('renameBtn');
     const saveAsBtn = document.getElementById('saveAsBtn');
     const filenameSpan = document.getElementById('filename');
-    const filenameDisplay = document.getElementById('filenameDisplay');
-    const autosaveToggle = document.getElementById('autosaveToggle');
     const charsSpan = document.getElementById('chars');
 
     // Estado
     let currentFilename = 'sin_nombre.txt';
     let lastSavedText = '';
+    let fileHandle = null; // File System Access API
 
-    // Utils: descargar texto como archivo
-    function downloadText(filename, text) {
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+    // Contador de caracteres
+    function updateChars() {
+      charsSpan.textContent = editor.value.length;
     }
 
-    // Guardar (usa download)
-    function saveAsFile() {
-      const text = editor.value;
-      downloadText(currentFilename, text);
-      lastSavedText = text;
-      updateStatus();
-    }
-
-    // Guardar como (elige nombre)
-    function saveAsPrompt(){
-      const suggested = currentFilename || 'sin_nombre.txt';
-      const name = prompt('Guardar como', suggested);
-      if (!name) return;
-      currentFilename = name.endsWith('.txt') ? name : name + '.txt';
-      filenameSpan.textContent = currentFilename;
-      saveAsFile();
-    }
-
-    // Abrir archivo: leer contenido de input[file]
-    fileInput.addEventListener('change', async (e) => {
-      const f = e.target.files[0];
-      if (!f) return;
-      const text = await f.text();
-      editor.value = text;
-      currentFilename = f.name || 'sin_nombre.txt';
-      filenameSpan.textContent = currentFilename;
-      lastSavedText = text;
+    editor.addEventListener('input', () => {
       updateChars();
-      if (autosaveToggle.checked) saveToLocal();
     });
 
-    openBtn.addEventListener('click', () => fileInput.click());
-    saveBtn.addEventListener('click', saveAsFile);
-    saveAsBtn.addEventListener('click', saveAsPrompt);
+    // Guardar archivo
+    async function saveFile() {
+      const text = editor.value;
 
+      if (fileHandle) {
+        try {
+          const writable = await fileHandle.createWritable();
+          await writable.write(text);
+          await writable.close();
+          lastSavedText = text;
+          updateStatus();
+          alert('Archivo guardado correctamente.');
+        } catch (err) {
+          console.error(err);
+          alert('No se pudo guardar el archivo.');
+        }
+      } else {
+        saveAsFile();
+      }
+    }
+
+    // Guardar como
+    async function saveAsFile() {
+      try {
+        fileHandle = await window.showSaveFilePicker({
+          suggestedName: currentFilename,
+          types: [
+            { description: 'Text Files', accept: { 'text/plain': ['.txt'] } }
+          ]
+        });
+        currentFilename = fileHandle.name;
+        filenameSpan.textContent = currentFilename;
+        await saveFile();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Abrir archivo
+    async function openFile() {
+      try {
+        [fileHandle] = await window.showOpenFilePicker({
+          types: [
+            { description: 'Text Files', accept: { 'text/plain': ['.txt'] } }
+          ],
+          multiple: false
+        });
+
+        const file = await fileHandle.getFile();
+        editor.value = await file.text();
+        currentFilename = file.name;
+        filenameSpan.textContent = currentFilename;
+        lastSavedText = editor.value;
+        updateChars();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Nuevo archivo
     newBtn.addEventListener('click', () => {
       if (editor.value && !confirm('Crear nuevo archivo y perder los cambios no guardados?')) return;
       editor.value = '';
       currentFilename = 'sin_nombre.txt';
+      fileHandle = null;
       filenameSpan.textContent = currentFilename;
       lastSavedText = '';
       updateChars();
-      localStorage.removeItem('simple_notepad_draft');
     });
 
-    // Renombrar archivo
+    // Renombrar archivo (solo cambia el nombre mostrado, no el handle)
     renameBtn.addEventListener('click', () => {
-      const suggested = currentFilename || 'sin_nombre.txt';
-      const name = prompt('Nuevo nombre de archivo:', suggested);
-      if (!name) return;
-      currentFilename = name.endsWith('.txt') ? name : name + '.txt';
+      const newName = prompt('Nuevo nombre de archivo:', currentFilename);
+      if (!newName) return;
+      currentFilename = newName.endsWith('.txt') ? newName : newName + '.txt';
       filenameSpan.textContent = currentFilename;
-      if (autosaveToggle.checked) saveToLocal();
     });
 
-    // Contador de caracteres
-    function updateChars(){
-      charsSpan.textContent = editor.value.length;
-    }
-    editor.addEventListener('input', () => {
-      updateChars();
-      if (autosaveToggle.checked) debounceSaveLocal();
-    });
-
-    // Autosave en localStorage
-    function saveToLocal(){
-      const payload = { text: editor.value, filename: currentFilename, ts: Date.now() };
-      localStorage.setItem('simple_notepad_draft', JSON.stringify(payload));
-    }
-    function loadFromLocal(){
-      try{
-        const raw = localStorage.getItem('simple_notepad_draft');
-        if (!raw) return false;
-        const p = JSON.parse(raw);
-        editor.value = p.text || '';
-        currentFilename = p.filename || currentFilename;
-        filenameSpan.textContent = currentFilename;
-        lastSavedText = editor.value;
-        updateChars();
-        return true;
-      }catch(e){return false}
-    }
-
-    // Debounce helper
-    let debounceTimer = null;
-    function debounceSaveLocal(){
-      if (debounceTimer) clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => saveToLocal(), 700);
-    }
+    // Eventos botones
+    openBtn.addEventListener('click', openFile);
+    saveBtn.addEventListener('click', saveFile);
+    saveAsBtn.addEventListener('click', saveAsFile);
 
     // Atajos de teclado
     window.addEventListener('keydown', (e) => {
       const cmd = e.ctrlKey || e.metaKey;
       if (!cmd) return;
-      if (e.key.toLowerCase() === 's'){
+      if (e.key.toLowerCase() === 's') {
         e.preventDefault();
-        saveAsFile();
+        saveFile();
       }
-      if (e.key.toLowerCase() === 'o'){
+      if (e.key.toLowerCase() === 'o') {
         e.preventDefault();
-        fileInput.click();
+        openFile();
       }
-      if (e.key.toLowerCase() === 'n'){
+      if (e.key.toLowerCase() === 'n') {
         e.preventDefault();
         newBtn.click();
       }
-      if (e.shiftKey && e.key.toLowerCase() === 's'){
-        e.preventDefault();
-        saveAsPrompt();
-      }
     });
 
-    // Inicialización
-    function updateStatus(){
+    // Estado de cambios
+    function updateStatus() {
       const changed = editor.value !== lastSavedText;
-      if (changed) filenameDisplay.title = 'Hay cambios no guardados';
-      else filenameDisplay.title = 'Todos los cambios guardados (localmente)';
+      if (changed) filenameSpan.title = 'Hay cambios no guardados';
+      else filenameSpan.title = 'Todos los cambios guardados';
     }
 
-    // Cargar autosave si existe
-    const hadDraft = loadFromLocal();
-    if (hadDraft) autosaveToggle.checked = true;
-    updateStatus();
+    editor.addEventListener('input', updateStatus);
     updateChars();
-
-    // Si el usuario intenta cerrar la pestaña con cambios no guardados — alerta
-    window.addEventListener('beforeunload', (e) => {
-      if (editor.value !== lastSavedText){
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    });
   </script>
 </body>
 </html>

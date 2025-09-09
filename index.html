@@ -4,75 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bloc de notas</title>
-  <style>
-    :root{--bg:#f6f8fa;--card:#fff;--accent:#2563eb;--muted:#6b7280}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
-    body{background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 60%);display:flex;align-items:center;justify-content:center;padding:24px}
-    .app{width:100%;max-width:980px;background:var(--card);box-shadow:0 8px 30px rgba(2,6,23,0.08);border-radius:12px;overflow:hidden}
-    header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f1f5f9}
-    .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    h1{font-size:16px;margin:0}
-    .controls{margin-left:auto;display:flex;gap:8px;align-items:center}
-    button{background:transparent;border:1px solid #e6edf6;padding:8px 10px;border-radius:8px;font-weight:600;cursor:pointer}
-    button.primary{background:var(--accent);color:white;border:none}
-    .toolbar{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #f1f5f9;align-items:center}
-    .filename{color:var(--muted);font-size:13px}
-    .editor{padding:12px}
-    textarea {width: 100%;height: 60vh;resize: vertical;border: 1px solid #e6edf6;border-radius: 8px;padding: 12px;font-size: 15px;line-height: 1.45;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'SegoeUI Mono', monospace;background: transparent;box-sizing: border-box;}
-    .small{font-size:13px;color:var(--muted)}
-    input[type=file]{display:none}
-    footer{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid #f1f5f9}
-    .kb{font-size:12px;color:var(--muted)}
-    .toggle{display:flex;align-items:center;gap:8px}
-    .chip{background:#f8fafc;padding:6px 8px;border-radius:999px;border:1px solid #eef2f6;font-size:13px}
-    /* --- Responsive --- */
-@media (max-width: 768px) {
-  header {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .controls {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-  .controls button {
-    flex: 1 1 auto;
-    min-width: 100px;
-  }
-  .toolbar {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .filename {
-    flex-basis: 100%;
-  }
-  textarea {
-    height: 50vh; /* menos alto en móviles */
-  }
-  h1 {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 12px;
-  }
-  header {
-    padding: 8px;
-  }
-  .controls button {
-    font-size: 13px;
-    padding: 6px 8px;
-  }
-  textarea {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
-
-  </style>
+  <link rel="icon" href="media/favicon/icons8-bloc-parakeet-color-96.png" type="image/png">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <div class="app" role="application">
@@ -95,7 +28,6 @@
     <div class="toolbar">
       <div class="filename" id="filenameDisplay">Archivo: <span id="filename">sin_nombre.txt</span></div>
       <div style="width:12px"></div>
-      <!-- <label class="toggle small"><input type="checkbox" id="autosaveToggle" /> Auto-guardar (local)</label> -->
       <div style="flex:1"></div>
       <div class="chip">Tamaño: <span id="chars">0</span> caracteres</div>
     </div>
@@ -105,146 +37,13 @@
     </div>
 
     <footer>
-      <div class="kb">Atajos: <strong>Ctrl/Cmd + S</strong> guardar — <strong>Ctrl/Cmd + O</strong> abrir — <strong>Ctrl/Cmd + N</strong> nuevo</div>
+      <div class="kb">Atajos: <strong>Ctrl/Cmd + S</strong> guardar — <strong>Ctrl/Cmd + O</strong></div>
       <div class="small">Hecho con ❤️ — Leo</div>
     </footer>
   </div>
 
-  <script>
-    // Elementos
-    const editor = document.getElementById('editor');
-    const saveBtn = document.getElementById('saveBtn');
-    const openBtn = document.getElementById('openBtn');
-    const newBtn = document.getElementById('newBtn');
-    const renameBtn = document.getElementById('renameBtn');
-    const saveAsBtn = document.getElementById('saveAsBtn');
-    const filenameSpan = document.getElementById('filename');
-    const charsSpan = document.getElementById('chars');
+  <script src="scripts/main.js"></script>
 
-    // Estado
-    let currentFilename = 'sin_nombre.txt';
-    let lastSavedText = '';
-    let fileHandle = null; // File System Access API
 
-    // Contador de caracteres
-    function updateChars() {
-      charsSpan.textContent = editor.value.length;
-    }
-
-    editor.addEventListener('input', () => {
-      updateChars();
-    });
-
-    // Guardar archivo
-    async function saveFile() {
-      const text = editor.value;
-
-      if (fileHandle) {
-        try {
-          const writable = await fileHandle.createWritable();
-          await writable.write(text);
-          await writable.close();
-          lastSavedText = text;
-          updateStatus();
-          alert('Archivo guardado correctamente.');
-        } catch (err) {
-          console.error(err);
-          alert('No se pudo guardar el archivo.');
-        }
-      } else {
-        saveAsFile();
-      }
-    }
-
-    // Guardar como
-    async function saveAsFile() {
-      try {
-        fileHandle = await window.showSaveFilePicker({
-          suggestedName: currentFilename,
-          types: [
-            { description: 'Text Files', accept: { 'text/plain': ['.txt'] } }
-          ]
-        });
-        currentFilename = fileHandle.name;
-        filenameSpan.textContent = currentFilename;
-        await saveFile();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    // Abrir archivo
-    async function openFile() {
-      try {
-        [fileHandle] = await window.showOpenFilePicker({
-          types: [
-            { description: 'Text Files', accept: { 'text/plain': ['.txt'] } }
-          ],
-          multiple: false
-        });
-
-        const file = await fileHandle.getFile();
-        editor.value = await file.text();
-        currentFilename = file.name;
-        filenameSpan.textContent = currentFilename;
-        lastSavedText = editor.value;
-        updateChars();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    // Nuevo archivo
-    newBtn.addEventListener('click', () => {
-      if (editor.value && !confirm('Crear nuevo archivo y perder los cambios no guardados?')) return;
-      editor.value = '';
-      currentFilename = 'sin_nombre.txt';
-      fileHandle = null;
-      filenameSpan.textContent = currentFilename;
-      lastSavedText = '';
-      updateChars();
-    });
-
-    // Renombrar archivo (solo cambia el nombre mostrado, no el handle)
-    renameBtn.addEventListener('click', () => {
-      const newName = prompt('Nuevo nombre de archivo:', currentFilename);
-      if (!newName) return;
-      currentFilename = newName.endsWith('.txt') ? newName : newName + '.txt';
-      filenameSpan.textContent = currentFilename;
-    });
-
-    // Eventos botones
-    openBtn.addEventListener('click', openFile);
-    saveBtn.addEventListener('click', saveFile);
-    saveAsBtn.addEventListener('click', saveAsFile);
-
-    // Atajos de teclado
-    window.addEventListener('keydown', (e) => {
-      const cmd = e.ctrlKey || e.metaKey;
-      if (!cmd) return;
-      if (e.key.toLowerCase() === 's') {
-        e.preventDefault();
-        saveFile();
-      }
-      if (e.key.toLowerCase() === 'o') {
-        e.preventDefault();
-        openFile();
-      }
-      if (e.key.toLowerCase() === 'n') {
-        e.preventDefault();
-        newBtn.click();
-      }
-    });
-
-    // Estado de cambios
-    function updateStatus() {
-      const changed = editor.value !== lastSavedText;
-      if (changed) filenameSpan.title = 'Hay cambios no guardados';
-      else filenameSpan.title = 'Todos los cambios guardados';
-    }
-
-    editor.addEventListener('input', updateStatus);
-    updateChars();
-  </script>
 </body>
 </html>

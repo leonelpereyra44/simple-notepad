@@ -16,17 +16,17 @@
         <div class="small">Guarda y abre archivos .txt fácilmente</div>
       </div>
       <div class="controls">
-        <button id="newBtn" title="Nuevo (Ctrl+N)">Nuevo</button>
-        <button id="openBtn" title="Abrir (Ctrl+O)">Abrir</button>
+        <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
+        <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
         <input id="fileInput" type="file" accept=".txt,text/plain" />
-        <button id="renameBtn" title="Cambiar nombre">Renombrar</button>
         <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-        <button id="saveAsBtn" title="Guardar como">Guardar como</button>
+        <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
       </div>
     </header>
 
     <div class="toolbar">
       <div class="filename" id="filenameDisplay">Archivo: <span id="filename">sin_nombre.txt</span></div>
+      <button id="renameBtn" title="Cambiar nombre"><img src="media/icons8-editar-16.png" alt=""></button>
       <div style="width:12px"></div>
       <div style="flex:1"></div>
       <div class="chip">Tamaño: <span id="chars">0</span> caracteres</div>

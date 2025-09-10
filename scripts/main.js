@@ -175,7 +175,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (menuToggle && menu) {
     // Abrir/cerrar menú
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation(); // evitar que el click cierre inmediatamente
       menu.classList.toggle("show");
     });
 
@@ -184,6 +185,13 @@ window.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", () => {
         menu.classList.remove("show");
       });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && e.target !== menuToggle) {
+        menu.classList.remove("show");
+      }
     });
   }
 });

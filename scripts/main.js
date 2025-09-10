@@ -9,7 +9,7 @@
     const charsSpan = document.getElementById('chars');
 
     // Estado
-    let currentFilename = 'sin_nombre.txt';
+    let currentFilename = 'nombre.txt';
     let lastSavedText = '';
     let fileHandle = null; // File System Access API
 
@@ -126,8 +126,13 @@
     // Estado de cambios
     function updateStatus() {
       const changed = editor.value !== lastSavedText;
-      if (changed) filenameSpan.title = 'Hay cambios no guardados';
-      else filenameSpan.title = 'Todos los cambios guardados';
+      if (changed) {
+        filenameSpan.title = 'Hay cambios no guardados';
+      } else {
+        filenameSpan.title = 'Todos los cambios guardados';
+      }
+      currentFilename = changed ? (currentFilename.endsWith('*') ? currentFilename : currentFilename + '*') : currentFilename.replace(/\*$/, '');
+      filenameSpan.textContent = currentFilename;
     }
 
     editor.addEventListener('input', updateStatus);

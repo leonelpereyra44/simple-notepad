@@ -3,35 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bloc de notas</title>
+
+  <!-- SEO básico -->
+  <title>Bloc de notas online — Crear, abrir y guardar archivos .txt fácilmente</title>
+  <meta name="description" content="Bloc de notas online simple y gratuito. Escribe, guarda y abre archivos de texto (.txt) fácilmente desde tu navegador sin instalar nada.">
+  <meta name="keywords" content="bloc de notas online, editor de texto, notas online, guardar txt, abrir txt, editor txt">
+
+  <!-- Favicons -->
   <link rel="icon" href="media/favicon/icons8-bloc-parakeet-color-16.png" type="image/png">
+
+  <!-- Open Graph (para Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Bloc de notas online — simple y gratuito">
+  <meta property="og:description" content="Escribe, guarda y abre archivos de texto (.txt) fácilmente desde tu navegador.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tudominio.com">
+  <meta property="og:image" content="https://tudominio.com/media/favicon/icons8-bloc-parakeet-color-32.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bloc de notas online — simple y gratuito">
+  <meta name="twitter:description" content="Escribe, guarda y abre archivos de texto (.txt) fácilmente desde tu navegador.">
+  <meta name="twitter:image" content="https://tudominio.com/media/favicon/icons8-bloc-parakeet-color-32.png">
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="styles/style.css">
+
+
 </head>
+
 <body>
   <div class="app" role="application">
-   <header>
-  <div class="logo"><img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt=""></div>
-  <div>
-    <h1>Bloc de notas — simple</h1>
-    <div class="small">Guarda y abre archivos .txt fácilmente</div>
-  </div>
+    <header>
+      <div class="logo">
+        <img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt="Logo de bloc de notas online">
+      </div>
+      <div>
+        <h1>Bloc de notas — simple</h1>
+        <div class="small">Guarda y abre archivos .txt fácilmente</div>
+      </div>
 
-  <!-- Botón hamburguesa -->
-  <button class="menu-toggle" id="menuToggle" aria-label="Menú">&#9776;</button>
+      <!-- Botón hamburguesa -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">&#9776;</button>
 
-  <!-- Menú de controles -->
-  <div class="controls" id="menu">
-    <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
-    <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
-    <input id="fileInput" type="file" accept=".txt,text/plain" />
-    <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-    <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
-  </div>
-</header>
+      <!-- Menú de controles -->
+      <div class="controls" id="menu">
+        <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
+        <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
+        <input id="fileInput" type="file" accept=".txt,text/plain" />
+        <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
+        <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
+      </div>
+    </header>
 
     <div class="toolbar">
       <div class="filename" id="filenameDisplay">Archivo: <span id="filename">sin_nombre.txt</span></div>
-      <button id="renameBtn" title="Cambiar nombre"><img src="media/icons8-editar-16.png" alt=""></button>
+      <button id="renameBtn" title="Cambiar nombre">
+        <img src="media/icons8-editar-16.png" alt="Icono editar nombre de archivo">
+      </button>
       <div style="width:12px"></div>
       <div style="flex:1"></div>
       <div class="chip">Tamaño: <span id="chars">0</span> caracteres</div>
@@ -40,15 +68,45 @@
     <div class="editor">
       <textarea id="editor" placeholder="Escribe aquí..." spellcheck="false"></textarea>
     </div>
+    <section class="atajos">
+      <div class="kb">
+        Atajos: <strong>Ctrl/Cmd + S</strong> guardar — 
+        <strong>Ctrl/Cmd + O</strong> abrir
+      </div>
+      <div class="small">Hecho con ❤️ — Leo</div>
+    </section>
 
     <footer>
-      <div class="kb">Atajos: <strong>Ctrl/Cmd + S</strong> guardar — <strong>Ctrl/Cmd + O</strong></div>
-      <div class="small">Hecho con ❤️ — Leo</div>
+      <!-- Sección de texto optimizado para SEO -->
+      <section class="seo-text">
+        <h2>Bloc de notas online gratuito</h2>
+        <p>
+          Este <strong>bloc de notas online</strong> es una herramienta simple para 
+          escribir, abrir y guardar archivos de texto <code>.txt</code> sin necesidad 
+          de instalar programas. Ideal para tomar notas rápidas, programadores que 
+          trabajan con texto plano o usuarios que necesitan editar documentos 
+          básicos desde cualquier dispositivo.
+        </p>
+
+        <h2>Características principales</h2>
+        <ul>
+          <li>Abrir archivos <code>.txt</code> directamente desde tu navegador.</li>
+          <li>Guardar y renombrar documentos de manera rápida.</li>
+          <li>Compatible con Windows, Mac, Linux y móviles.</li>
+          <li>Atajos de teclado para mayor productividad.</li>
+        </ul>
+
+        <h2>Cómo usarlo</h2>
+        <p>
+          Escribe en el área de edición, utiliza los botones o atajos de teclado 
+          (<strong>Ctrl + S</strong> para guardar, <strong>Ctrl + O</strong> para abrir) 
+          y mantén tus notas siempre accesibles. 
+        </p>
+      </section>
     </footer>
   </div>
 
   <script src="scripts/main.js"></script>
-
-
 </body>
+
 </html>

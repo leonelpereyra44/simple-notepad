@@ -1,0 +1,28 @@
+/* --- Editor --- */
+.editor {
+  padding: 12px;
+}
+
+textarea {
+  width: 100%;
+  height: 60vh;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  line-height: 1.45;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'SegoeUI Mono', monospace;
+  background: transparent;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+input[type=file] {
+  display: none;
+}

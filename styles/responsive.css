@@ -1,0 +1,66 @@
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+  .controls {
+    display: none; /* oculto por defecto en mobile */
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .controls.show {
+    display: flex; /* mostrar cuando se active */
+  }
+  .controls button {
+    width: 100%;
+  }
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filename {
+    flex-basis: 100%;
+  }
+  textarea {
+    height: 50vh;
+  }
+  h1 {
+    font-size: 14px;
+  }
+
+  .seo-text {
+    font-size: 14px;
+    padding: 16px 12px;
+  }
+  .seo-text h2 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  header {
+    padding: 8px;
+  }
+  .controls button {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+  textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .seo-text {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+}

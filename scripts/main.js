@@ -13,6 +13,31 @@
     let lastSavedText = '';
     let fileHandle = null; // File System Access API
 
+    // Cargar desde localStorage al iniciar
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedText = localStorage.getItem("editorText");
+      if (savedText !== null) {
+      editor.value = savedText;
+      updateChars();
+      lastSavedText = savedText;
+      updateStatus();
+      }
+
+      const savedFilename = localStorage.getItem("currentFilename");
+      if (savedFilename) {
+        currentFilename = savedFilename;
+        filenameSpan.textContent = currentFilename;
+      }
+    });
+
+// Guardar en localStorage cada vez que se escribe
+editor.addEventListener("input", () => {
+  localStorage.setItem("editorText", editor.value);
+  localStorage.setItem("currentFilename", currentFilename);
+  updateChars();
+  updateStatus();
+});
+
     // Contador de caracteres
     function updateChars() {
       charsSpan.textContent = editor.value.length;
@@ -90,6 +115,9 @@
       filenameSpan.textContent = currentFilename;
       lastSavedText = '';
       updateChars();
+      // Borrar datos guardados en localStorage
+      localStorage.removeItem("editorText");
+      localStorage.removeItem("currentFilename");
     });
 
     // Renombrar archivo (solo cambia el nombre mostrado, no el handle)

@@ -9,20 +9,25 @@
 </head>
 <body>
   <div class="app" role="application">
-    <header>
-      <div class="logo"><img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt=""></div>
-      <div>
-        <h1>Bloc de notas — simple</h1>
-        <div class="small">Guarda y abre archivos .txt fácilmente</div>
-      </div>
-      <div class="controls">
-        <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
-        <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
-        <input id="fileInput" type="file" accept=".txt,text/plain" />
-        <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-        <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
-      </div>
-    </header>
+   <header>
+  <div class="logo"><img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt=""></div>
+  <div>
+    <h1>Bloc de notas — simple</h1>
+    <div class="small">Guarda y abre archivos .txt fácilmente</div>
+  </div>
+
+  <!-- Botón hamburguesa -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">&#9776;</button>
+
+  <!-- Menú de controles -->
+  <div class="controls" id="menu">
+    <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
+    <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
+    <input id="fileInput" type="file" accept=".txt,text/plain" />
+    <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
+    <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
+  </div>
+</header>
 
     <div class="toolbar">
       <div class="filename" id="filenameDisplay">Archivo: <span id="filename">sin_nombre.txt</span></div>

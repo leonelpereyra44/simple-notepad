@@ -30,13 +30,13 @@
       }
     });
 
-// Guardar en localStorage cada vez que se escribe
-editor.addEventListener("input", () => {
-  localStorage.setItem("editorText", editor.value);
-  localStorage.setItem("currentFilename", currentFilename);
-  updateChars();
-  updateStatus();
-});
+    // Guardar en localStorage cada vez que se escribe
+  editor.addEventListener("input", () => {
+    localStorage.setItem("editorText", editor.value);
+    localStorage.setItem("currentFilename", currentFilename);
+    updateChars();
+    updateStatus();
+  });
 
     // Contador de caracteres
     function updateChars() {
@@ -167,3 +167,23 @@ editor.addEventListener("input", () => {
 
     editor.addEventListener('input', updateStatus);
     updateChars();
+
+// Menú hamburguesa
+window.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const menu = document.getElementById("menu");
+
+  if (menuToggle && menu) {
+    // Abrir/cerrar menú
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("show");
+    });
+
+    // Cerrar menú al hacer click en un botón dentro
+    menu.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        menu.classList.remove("show");
+      });
+    });
+  }
+});

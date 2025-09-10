@@ -83,6 +83,16 @@ h1 {
   margin: 0;
 }
 
+/* Botón hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
 .controls {
   margin-left: auto;
   display: flex;
@@ -198,14 +208,21 @@ footer {
     flex-wrap: wrap;
     gap: 8px;
   }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
   .controls {
+    display: none; /* oculto por defecto en mobile */
+    flex-direction: column;
     width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .controls.show {
+    display: flex; /* mostrar cuando se active */
   }
   .controls button {
-    flex: 1 1 auto;
-    min-width: 100px;
+    width: 100%;
   }
   .toolbar {
     flex-wrap: wrap;

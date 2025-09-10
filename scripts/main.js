@@ -133,6 +133,8 @@
       }
       currentFilename = changed ? (currentFilename.endsWith('*') ? currentFilename : currentFilename + '*') : currentFilename.replace(/\*$/, '');
       filenameSpan.textContent = currentFilename;
+      saveBtn.textContent = changed ? 'Guardar*' : 'Guardar';
+      // Esta función actualiza el estado del archivo, incluyendo si hay cambios no guardados.
     }
 
     editor.addEventListener('input', updateStatus);

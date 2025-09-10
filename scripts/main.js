@@ -168,6 +168,21 @@
     editor.addEventListener('input', updateStatus);
     updateChars();
 
+    editor.addEventListener("keydown", function(e) {
+    if (e.key === "Tab") {
+      e.preventDefault(); // Evita que el foco cambie
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+
+      // Inserta un tabulador (o 2-4 espacios si prefieres)
+      const tabCharacter = "\t"; // o "    " para 4 espacios
+      this.value = this.value.substring(0, start) + tabCharacter + this.value.substring(end);
+
+      // Mueve el cursor después del tab
+      this.selectionStart = this.selectionEnd = start + tabCharacter.length;
+    }
+  });
+
 // Menú hamburguesa
 window.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menuToggle");

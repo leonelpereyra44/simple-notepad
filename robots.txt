@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Evitar indexar recursos internos o pruebas
+Disallow: /admin/
+Disallow: /test/
+Disallow: /tmp/
+Disallow: /scripts/
+
+# Sitemap
+Sitemap: https://asimplenotepad.com/sitemap.xml

@@ -147,6 +147,7 @@
   <!-- Estilos con optimización de carga -->
   <link rel="preload" href="styles/style.css?v=2.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="styles/style.css?v=2.0.0" /></noscript>
+  <link rel="stylesheet" href="styles/legal.css?v=1.2" />
 
 </head>
 
@@ -210,13 +211,6 @@
       <div id="statusInfo">Línea 1, Columna 1</div>
       <div class="char-counter">Caracteres: <span id="charCount">0</span></div>
     </div>
-    <section class="atajos">
-      <div class="kb">
-        Atajos: <strong>Ctrl/Cmd + S</strong> guardar — 
-        <strong>Ctrl/Cmd + O</strong> abrir
-      </div>
-      <div class="small">Hecho con ❤️</div>
-    </section>
 
     <footer>
       <!-- Sección de texto optimizado para SEO -->
@@ -275,6 +269,47 @@
 
         <p><small><em>Última actualización: septiembre 2025.</em></small></p>
       </section>
+      
+      <!-- Enlaces de navegación -->
+      <div class="site-navigation">
+        <div class="nav-section">
+          <h4>📚 Recursos</h4>
+          <nav>
+            <a href="tutorial.html">Tutorial completo</a>
+            <a href="faq.html">Preguntas frecuentes</a>
+            <a href="contact.html">Contacto y soporte</a>
+          </nav>
+        </div>
+        
+        <div class="nav-section">
+          <h4>📋 Legal</h4>
+          <nav>
+            <a href="privacy.html">Política de privacidad</a>
+            <a href="cookies.html">Política de cookies</a>
+          </nav>
+        </div>
+        
+        <div class="nav-section">
+          <h4>🔗 Enlaces</h4>
+          <nav>
+            <a href="https://github.com/leonelpereyra44/simple-notepad" target="_blank" rel="noopener">
+              GitHub
+            </a>
+          </nav>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Simple Notepad. Todos los derechos reservados.</p>
+        <nav>
+          <a href="index.html">Inicio</a>
+          <a href="tutorial.html">Tutorial</a>
+          <a href="faq.html">FAQ</a>
+          <a href="privacy.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="contact.html">Contacto</a>
+        </nav>
+      </div>
     </footer>
   </div>
   
@@ -297,8 +332,95 @@
   <!-- Contenedor para modales -->
   <div id="modal-container" aria-hidden="true"></div>
 
+    <!-- Banner de cookies (RGPD/GDPR) -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <p><strong>🍪 Uso de cookies</strong></p>
+        <p>Utilizamos cookies para mejorar tu experiencia, analizar el tráfico y mostrar publicidad personalizada. Al continuar navegando, aceptas nuestro uso de cookies.</p>
+      </div>
+      <div class="cookie-actions">
+        <button id="acceptCookies" class="btn primary">✅ Aceptar</button>
+        <button id="rejectCookies" class="btn secondary">❌ Rechazar</button>
+        <a href="cookies.html" class="btn secondary">📋 Más info</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts con carga optimizada -->
   <script type="module" src="scripts/app.js?v=2.0.0"></script>
+  
+  <!-- Cookie Banner Script -->
+  <script>
+    (function() {
+      const COOKIE_CONSENT = 'cookie_consent';
+      const banner = document.getElementById('cookieBanner');
+      const acceptBtn = document.getElementById('acceptCookies');
+      const rejectBtn = document.getElementById('rejectCookies');
+
+      // Verificar si ya se dio consentimiento
+      function checkCookieConsent() {
+        const consent = localStorage.getItem(COOKIE_CONSENT);
+        if (!consent) {
+          showBanner();
+        } else if (consent === 'accepted') {
+          loadAnalytics();
+        }
+      }
+
+      // Mostrar banner
+      function showBanner() {
+        banner.style.display = 'block';
+        setTimeout(() => {
+          banner.classList.add('show');
+        }, 100);
+      }
+
+      // Ocultar banner
+      function hideBanner() {
+        banner.classList.remove('show');
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 300);
+      }
+
+      // Cargar Google Analytics y AdSense
+      function loadAnalytics() {
+        // Google Analytics
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID';
+        document.head.appendChild(gaScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR-GA-ID', { 
+          anonymize_ip: true,
+          cookie_expires: 63072000 // 2 años
+        });
+
+        console.log('📊 Analytics cargado con consentimiento');
+      }
+
+      // Aceptar cookies
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem(COOKIE_CONSENT, 'accepted');
+        hideBanner();
+        loadAnalytics();
+      });
+
+      // Rechazar cookies
+      rejectBtn.addEventListener('click', () => {
+        localStorage.setItem(COOKIE_CONSENT, 'rejected');
+        hideBanner();
+        console.log('🍪 Cookies de seguimiento rechazadas');
+      });
+
+      // Inicializar al cargar la página
+      document.addEventListener('DOMContentLoaded', checkCookieConsent);
+    })();
+  </script>
   
   <!-- Service Worker para PWA (opcional) -->
   <script>
@@ -309,6 +431,8 @@
       });
     }
   </script>
+</body>
+</html>
   
 </body>
 </html>

@@ -11,8 +11,6 @@
 
 **[👉 Probar A Simple Notepad](https://asimplenotepad.com)**
 
-![Screenshot del Editor](https://via.placeholder.com/800x400/4a90e2/ffffff?text=A+Simple+Notepad+Screenshot)
-
 ## ✨ Características
 
 - 📱 **Totalmente responsive** - Funciona perfectamente en móviles, tablets y desktop
@@ -186,9 +184,7 @@ simple-notepad/
 ## 📞 Contacto y Soporte
 
 - 🌐 **Website**: [asimplenotepad.com](https://asimplenotepad.com)
-- 📧 **Email**: leonelpereyra44@gmail.com
 - 🐙 **GitHub**: [@leonelpereyra44](https://github.com/leonelpereyra44)
-- 🐦 **Twitter**: [@leonelpereyra44](https://twitter.com/leonelpereyra44)
 
 ## 📜 Licencia
 

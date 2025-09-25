@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es-ES" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+  
+  <!-- Cache Control -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  
+  <!-- SEO Fundamentals -->
+  <title>Contacto - Simple Notepad</title>
+  <meta name="description" content="Ponte en contacto con el equipo de Simple Notepad. Envíanos tus comentarios, sugerencias o reporta problemas." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://asimplenotepad.com/contact.html" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/icons8-bloc-parakeet-color-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/icons8-bloc-parakeet-color-32.png" />
+  
+  <!-- Estilos -->
+      <link rel="stylesheet" href="styles/style.css?v=2.3">
+    <link rel="stylesheet" href="styles/legal.css?v=1.2">
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <div class="logo">
+        <img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt="Simple Notepad Logo" width="32" height="32" loading="eager">
+      </div>
+      <div>
+        <h1>Simple Notepad</h1>
+        <div class="small">Contacto</div>
+      </div>
+      <nav>
+        <a href="index.html" class="btn secondary">← Volver al Editor</a>
+      </nav>
+    </header>
+
+    <main class="contact-content">
+      <div class="container">
+        <h1>📧 Contacto</h1>
+        <p>¿Tienes alguna pregunta, sugerencia o problema? ¡Nos encantaría ayudarte!</p>
+
+        <section class="contact-form">
+          <h2>� Formulario de contacto</h2>
+          <p>¿Tienes alguna pregunta, sugerencia o problema? Utiliza este formulario seguro para contactarnos. <strong>Respuesta garantizada en 24-48 horas.</strong></p>
+          
+          <div class="contact-tips">
+            <h3>� Consejos para tu mensaje:</h3>
+            <ul>
+              <li><strong>🐛 Para reportar errores:</strong> Incluye tu navegador y pasos para reproducir el problema</li>
+              <li><strong>� Para sugerencias:</strong> Describe tu idea con el mayor detalle posible</li>
+              <li><strong>🤝 Para colaborar:</strong> Menciona tu experiencia y cómo te gustaría contribuir</li>
+              <li><strong>❓ Para preguntas:</strong> Revisa primero nuestro <a href="faq.html">FAQ</a> y <a href="tutorial.html">tutorial</a></li>
+            </ul>
+          </div>
+            <form action="https://formspree.io/f/xblzlzyo" method="POST" id="contactForm">
+              <!-- Campo oculto para Formspree -->
+              <input type="hidden" name="_subject" value="Nuevo mensaje desde Simple Notepad" />
+              <input type="hidden" name="_next" value="contact.html?success=1" />
+              <input type="hidden" name="_captcha" value="true" />
+              
+              <!-- Honeypot anti-spam (campo oculto) -->
+              <input type="text" name="_gotcha" style="display:none" />
+
+              <div class="form-group">
+                <label for="name">Nombre *</label>
+                <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email * <small>(para poder responderte)</small></label>
+                <input type="email" id="email" name="_replyto" required placeholder="tu@email.com">
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Asunto *</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Selecciona un asunto</option>
+                  <option value="bug">🐛 Reportar error</option>
+                  <option value="feature">💡 Sugerir funcionalidad</option>
+                  <option value="feedback">💭 Comentarios generales</option>
+                  <option value="collaboration">🤝 Colaboración</option>
+                  <option value="privacy">🔒 Privacidad/RGPD</option>
+                  <option value="other">📋 Otro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="browser">Navegador (opcional)</label>
+                <input type="text" id="browser" name="browser" placeholder="Ej: Chrome 118, Firefox 119, Safari 17">
+              </div>
+
+              <div class="form-group">
+                <label for="message">Mensaje *</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Describe tu consulta, problema o sugerencia con el mayor detalle posible..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="privacy" name="privacy" required>
+                  He leído y acepto la <a href="privacy.html" target="_blank">Política de Privacidad</a> *
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="newsletter" name="newsletter">
+                  Quiero recibir actualizaciones sobre nuevas funcionalidades (opcional)
+                </label>
+              </div>
+
+              <button type="submit" class="btn primary">
+                📤 Enviar mensaje
+              </button>
+            </form>
+        </section>
+
+        <section class="faq-preview">
+          <h2>❓ Antes de contactarnos</h2>
+          <p>Revisa si puedes encontrar la información que necesitas en estos recursos:</p>
+          <div class="faq-links">
+            <a href="faq.html" class="btn secondary">📚 Ver todas las FAQ</a>
+            <a href="tutorial.html" class="btn secondary">🎓 Tutorial completo</a>
+            <a href="https://github.com/leonelpereyra44/simple-notepad" target="_blank" rel="noopener" class="btn secondary">
+              🔗 Repositorio en GitHub
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Simple Notepad. Todos los derechos reservados.</p>
+        <nav>
+          <a href="index.html">Inicio</a>
+          <a href="tutorial.html">Tutorial</a>
+          <a href="faq.html">FAQ</a>
+          <a href="privacy.html">Privacidad</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="contact.html">Contacto</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Verificar si venimos de un envío exitoso
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+      // Mostrar mensaje de éxito si venimos de Formspree
+      const formContainer = document.querySelector('.contact-form');
+      formContainer.innerHTML = `
+        <div style="text-align: center; padding: 2rem; background: #e8f5e8; border: 1px solid #4caf50; border-radius: 8px;">
+          <h3 style="color: #2e7d32; margin-bottom: 1rem;">✅ ¡Mensaje enviado exitosamente!</h3>
+          <p style="color: #2e7d32; margin-bottom: 1rem;">
+            Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos en 24-48 horas.
+          </p>
+          <p style="color: #666; font-size: 14px;">
+            Si necesitas ayuda inmediata, consulta nuestro 
+            <a href="faq.html" style="color: #2e7d32;">FAQ</a> o 
+            <a href="tutorial.html" style="color: #2e7d32;">tutorial</a>.
+          </p>
+          <button onclick="window.location.href='contact.html'" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Enviar otro mensaje
+          </button>
+        </div>
+      `;
+    }
+    
+    // Manejar el envío del formulario (con loading)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      const submitButton = this.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.innerHTML = '⏳ Enviando...';
+        submitButton.disabled = true;
+      }
+      
+      // Analytics (si está disponible)
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'contact_form_submit', {
+          event_category: 'Contact',
+          event_label: 'Form Submission'
+        });
+      }
+    });
+
+    // Detectar navegador automáticamente
+    const browserInfo = navigator.userAgent;
+    const browserField = document.getElementById('browser');
+    if (browserField && !browserField.value) {
+      browserField.placeholder = `Detectado: ${browserInfo.split(' ').slice(-2).join(' ')}`;
+    }
+  </script>
+  <script src="scripts/content.js?v=1.1"></script>
+</body>
+</html>

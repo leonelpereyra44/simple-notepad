@@ -1,69 +1,201 @@
-/* --- Logo --- */
+/* --- Logo mejorado --- */
 .logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- Botón hamburguesa --- */
+.logo::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  transition: transform var(--transition-slow);
+}
+
+.logo:hover::before {
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* --- Botón hamburguesa mejorado --- */
 .menu-toggle {
   display: none;
-  font-size: 22px;
-  background: none;
-  border: none;
+  font-size: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm);
   cursor: pointer;
   color: var(--text);
+  transition: all var(--transition);
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1000;
+}
+
+.menu-toggle:hover {
+  background: var(--accent);
+  color: var(--text2);
+  border-color: var(--accent);
+  transform: scale(1.05);
 }
 
 .controls {
   margin-left: auto;
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-sm);
   align-items: center;
+  flex-wrap: wrap;
+  transition: all var(--transition);
 }
 
-/* --- Botones --- */
+/* Asegurar que el menú esté visible en desktop */
+@media (min-width: 769px) {
+  .controls {
+    display: flex !important;
+  }
+  
+  .menu-toggle {
+    display: none !important;
+  }
+}
+
+/* --- Botones mejorados --- */
 button {
-  background: transparent;
+  background: var(--card);
   border: 1px solid var(--border);
-  padding: 8px 10px;
-  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius);
   font-weight: 600;
+  font-size: var(--font-size-sm);
   cursor: pointer;
   color: var(--text);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: 36px;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left var(--transition);
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: translateY(0);
   box-shadow: var(--shadow);
 }
 
 button.primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   color: var(--text2);
   border: none;
+  box-shadow: var(--shadow);
 }
+
 button.primary:hover {
-  background: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
 }
 
 button.secondary:hover {
-  background: var(--accent-hover);
+  background: var(--accent);
   color: var(--text2);
 }
 
-/* --- Chips --- */
-.chip {
-  background: var(--bgsecondary);
-  padding: 6px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 13px;
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button:disabled:hover {
+  background: var(--card);
   color: var(--text);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* Botón especial para renombrar */
+#renameBtn {
+  padding: var(--spacing-xs);
+  min-height: 32px;
+  width: 32px;
+  border-radius: var(--radius);
+}
+
+#renameBtn img {
+  transition: transform var(--transition);
+}
+
+#renameBtn:hover img {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* --- Chips mejorados --- */
+.chip {
+  background: linear-gradient(135deg, var(--accent-light), rgba(74, 144, 226, 0.1));
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--accent);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transition: all var(--transition);
+}
+
+.chip:hover {
+  background: var(--accent);
+  color: var(--text2);
+  transform: scale(1.05);
+}
+
+.chip span {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* Input file oculto */
+#fileInput {
+  display: none;
 }

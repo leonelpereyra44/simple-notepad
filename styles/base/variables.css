@@ -1,34 +1,88 @@
-/* --- Variables por defecto (modo claro) --- */
+/* --- Variables CSS Mejoradas --- */
 :root {
-  --bg: #f6f8fa;
-  --card: #fff;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --muted: #6b7280;
-  --text: #111827;
+  /* Colores principales */
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --accent: #4a90e2;
+  --accent-hover: #357abd;
+  --accent-light: #e3f2fd;
+  --muted: #64748b;
+  --text: #1e293b;
+  --text-secondary: #475569;
   --text2: #ffffff;
-  --border: #e6edf6;
-  --bgsecondary: #fff;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --bgsecondary: #ffffff;
+  
+  /* Colores de estado */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #06b6d4;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Fuentes */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  
+  /* Bordes redondeados */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
-/* --- Variables para modo oscuro (automaticas con el sistema) --- */
+/* --- Variables para modo oscuro --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1f2937;
-    --card: #111827;
-    --accent: #1d4ed8;
+    /* Colores principales oscuros */
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #60a5fa;
     --accent-hover: #3b82f6;
-    --muted: #9ca3af;
-    --text: #f9fafb;
-    --shadow: 0px 0px 4px rgb(255, 255, 255);
-    --border: #374151;
-    --bgsecondary: #111827;
+    --accent-light: #1e3a8a;
+    --muted: #94a3b8;
+    --text: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text2: #0f172a;
+    --border: #334155;
+    --border-light: #475569;
+    --bgsecondary: #1e293b;
+    
+    /* Colores de estado oscuros */
+    --success: #22c55e;
+    --warning: #fbbf24;
+    --error: #f87171;
+    --info: #38bdf8;
+    
+    /* Sombras oscuras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
   }
-
-  /* body {
-    background: linear-gradient(180deg, #111827 0%, var(--bg) 60%);
-  } */
-   body{
-    background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 60%);
-   }
 }

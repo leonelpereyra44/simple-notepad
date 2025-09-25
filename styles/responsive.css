@@ -1,66 +1,248 @@
-/* --- Responsive --- */
-@media (max-width: 768px) {
+/* --- Responsive Mejorado --- */
+/* Tablet y pantallas medianas */
+@media (max-width: 1024px) {
+  .app {
+    max-width: 90%;
+    margin: var(--spacing-md);
+  }
+  
   header {
-    flex-wrap: wrap;
-    gap: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
   }
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
-  .controls {
-    display: none; /* oculto por defecto en mobile */
-    flex-direction: column;
-    width: 100%;
-    margin-top: 8px;
-  }
-  .controls.show {
-    display: flex; /* mostrar cuando se active */
-  }
-  .controls button {
-    width: 100%;
-  }
-  .toolbar {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .filename {
-    flex-basis: 100%;
-  }
-  textarea {
-    height: 50vh;
-  }
-  h1 {
-    font-size: 14px;
-  }
-
-  .seo-text {
-    font-size: 14px;
-    padding: 16px 12px;
-  }
-  .seo-text h2 {
-    font-size: 15px;
+  
+  .editor {
+    padding: var(--spacing-lg);
   }
 }
 
+/* Móviles grandes */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-sm);
+  }
+  
+  .app {
+    min-height: 85vh;
+    border-radius: var(--radius-lg);
+  }
+  
+  header {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+  
+  header h1 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .menu-toggle {
+    display: flex;
+    margin-left: auto;
+    order: 3;
+  }
+  
+  .controls {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: var(--spacing-md);
+    gap: var(--spacing-sm);
+    order: 4;
+    background: var(--card);
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 999;
+  }
+  
+  .controls.show {
+    display: flex !important;
+    animation: slideDown 0.3s ease;
+  }
+  
+  .controls button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .toolbar {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .filename {
+    flex-basis: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .editor {
+    padding: var(--spacing-md);
+  }
+  
+  textarea {
+    height: 45vh;
+    min-height: 300px;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+  
+  .chip {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  section.atajos {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+    padding: var(--spacing-md);
+  }
+}
+
+/* Móviles pequeños */
 @media (max-width: 480px) {
   body {
-    padding: 12px;
+    padding: var(--spacing-xs);
   }
+  
+  .app {
+    border-radius: var(--radius);
+    min-height: 90vh;
+  }
+  
   header {
-    padding: 8px;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-xs);
   }
+  
+  header h1 {
+    font-size: var(--font-size-base);
+  }
+  
+  header .small {
+    font-size: var(--font-size-xs);
+  }
+  
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .controls {
+    padding: var(--spacing-sm);
+  }
+  
   .controls button {
-    font-size: 13px;
-    padding: 6px 8px;
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm);
+    min-height: 32px;
   }
+  
+  .toolbar {
+    padding: var(--spacing-sm);
+  }
+  
+  .filename {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .editor {
+    padding: var(--spacing-sm);
+  }
+  
   textarea {
-    font-size: 14px;
-    padding: 8px;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+    height: 40vh;
+    min-height: 250px;
   }
+  
+  .chip {
+    font-size: 10px;
+    padding: 2px var(--spacing-xs);
+  }
+  
+  section.atajos {
+    padding: var(--spacing-sm);
+  }
+  
+  .kb {
+    font-size: 10px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
 
-  .seo-text {
-    font-size: 13px;
-    padding: 12px 8px;
+/* Animaciones para móviles */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Orientación landscape en móviles */
+@media (max-width: 768px) and (orientation: landscape) {
+  textarea {
+    height: 35vh;
+    min-height: 200px;
+  }
+  
+  .app {
+    min-height: 80vh;
+  }
+}
+
+/* Pantallas muy pequeñas (smartwatches, etc.) */
+@media (max-width: 320px) {
+  header h1 {
+    font-size: var(--font-size-sm);
+  }
+  
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+  
+  textarea {
+    font-size: 12px;
+    height: 35vh;
+  }
+  
+  .controls button {
+    font-size: 10px;
+    padding: var(--spacing-xs);
+  }
+}
+
+/* Modo landscape para tablets */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .app {
+    max-width: 95%;
+  }
+  
+  .editor {
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+  
+  textarea {
+    height: 55vh;
+  }
+}
+
+/* Reduce motion para usuarios que lo prefieren */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -1,11 +1,22 @@
 User-agent: *
 Allow: /
+Allow: /media/
+Allow: /styles/
 
-# Evitar indexar recursos internos o pruebas
+# Evitar indexar recursos internos, scripts y archivos temporales
 Disallow: /admin/
 Disallow: /test/
 Disallow: /tmp/
 Disallow: /scripts/
+Disallow: /*.js$
+Disallow: /ads.txt
+
+# Crawl-delay para ser amigable con los servidores
+Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://asimplenotepad.com/sitemap.xml
+
+# Información adicional
+# Este es un editor de texto online gratuito
+# Última actualización: 2025-09-24

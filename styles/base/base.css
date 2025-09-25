@@ -1,11 +1,18 @@
-/* --- Base --- */
+/* --- Base mejorado --- */
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
-  margin: 0px;
-  padding: 0%;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
   color: var(--text);
-  background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 60%);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -14,5 +21,191 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  overflow-x: hidden;
+  position: relative;
+  background: var(--bg);
+}
+
+/* Background personalizado elegante */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(53, 122, 189, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, 
+      var(--bg) 0%, 
+      rgba(238, 242, 255, 0.3) 25%, 
+      var(--bg) 50%, 
+      rgba(74, 144, 226, 0.05) 75%, 
+      var(--bg) 100%
+    );
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Patrón sutil de puntos */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(74, 144, 226, 0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.3;
+  will-change: transform;
+}
+
+/* Optimización para móviles - background más simple */
+@media (max-width: 768px) {
+  body::after {
+    background-size: 30px 30px;
+    opacity: 0.2;
+  }
+}
+
+/* Animación sutil opcional para el fondo */
+@media (prefers-reduced-motion: no-preference) {
+  body::before {
+    animation: subtleMove 20s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes subtleMove {
+  0% {
+    background-position: 0% 0%, 100% 100%, 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%, 0% 0%, 100% 100%;
+  }
+}
+
+/* Reducir efectos para usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none !important;
+    transition: none;
+  }
+}
+
+/* Elementos de texto mejorados */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+h1 { font-size: var(--font-size-2xl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+
+p {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover, a:focus {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Botones base */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+  font-size: var(--font-size-sm);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inputs base */
+input, textarea, select {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Selección de texto */
+::selection {
+  background: var(--accent-light);
+  color: var(--text);
+}
+
+/* Background para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, 
+        var(--bg) 0%, 
+        rgba(30, 41, 59, 0.8) 25%, 
+        var(--bg) 50%, 
+        rgba(96, 165, 250, 0.08) 75%, 
+        var(--bg) 100%
+      );
+  }
+  
+  body::after {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(96, 165, 250, 0.2) 1px, transparent 0);
+    opacity: 0.2;
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--border-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

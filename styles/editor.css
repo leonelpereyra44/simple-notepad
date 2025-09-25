@@ -1,28 +1,103 @@
-/* --- Editor --- */
+/* --- Editor mejorado --- */
 .editor {
-  padding: 12px;
+  padding: var(--spacing-xl);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.editor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--spacing-xl);
+  right: var(--spacing-xl);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent, var(--accent));
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 1;
 }
 
 textarea {
   width: 100%;
-  height: 60vh;
+  height: 100%;
+  min-height: 60vh;
   resize: vertical;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 15px;
-  line-height: 1.45;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'SegoeUI Mono', monospace;
-  background: transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  font-family: var(--font-mono);
+  background: var(--card);
   color: var(--text);
   box-sizing: border-box;
+  transition: all var(--transition);
+  box-shadow: inset var(--shadow-sm);
+  outline: none;
+  position: relative;
+  z-index: 10;
 }
 
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 
+    inset var(--shadow-sm),
+    0 0 0 3px rgba(74, 144, 226, 0.1),
+    var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+textarea::placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Elementos de texto pequeño */
 .small {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Inputs de archivo */
+input[type=file] {
+  display: none;
+}
+
+/* Indicadores de estado del editor */
+.editor-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--border-light);
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-xs);
   color: var(--muted);
 }
 
-input[type=file] {
-  display: none;
+.editor-status .status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.editor-status .status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.editor-status .status-indicator.unsaved {
+  background: var(--warning);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }

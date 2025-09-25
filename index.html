@@ -4,6 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
   
+  <!-- Cache Control -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  
   <!-- SEO Fundamentals -->
   <title>Bloc de Notas Online Gratuito | Editor de Texto Simple y Rápido</title>
   <meta name="description" content="Bloc de notas online gratuito para crear, editar y guardar archivos .txt. Editor de texto simple, sin instalación, compatible con todos los dispositivos. ¡Pruébalo ahora!" />
@@ -140,8 +145,8 @@
   <meta name="language" content="Spanish" />
 
   <!-- Estilos con optimización de carga -->
-  <link rel="preload" href="styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="styles/style.css" /></noscript>
+  <link rel="preload" href="styles/style.css?v=2.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="styles/style.css?v=2.0.0" /></noscript>
 
 </head>
 
@@ -293,7 +298,7 @@
   <div id="modal-container" aria-hidden="true"></div>
 
   <!-- Scripts con carga optimizada -->
-  <script type="module" src="scripts/app.js"></script>
+  <script type="module" src="scripts/app.js?v=2.0.0"></script>
   
   <!-- Service Worker para PWA (opcional) -->
   <script>

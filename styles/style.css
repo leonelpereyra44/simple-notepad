@@ -9,15 +9,15 @@
  */
 
 /* === Importación de módulos CSS === */
-@import url("base/variables.css");  /* Variables CSS y tokens de diseño */
-@import url("base/base.css");       /* Estilos base y reset */
-@import url("layout.css");          /* Layout principal y grid */
-@import url("components.css");      /* Componentes reutilizables */
-@import url("editor.css");          /* Editor de texto principal */
-@import url("seo.css");            /* Estilos para contenido SEO */
-@import url("modals.css");          /* Sistema de modales personalizado */
-@import url("responsive.css");      /* Media queries y responsive */
-@import url("feature.css");        /* Features grid y características */
+@import url("base/variables.css?v=2.0.0");  /* Variables CSS y tokens de diseño */
+@import url("base/base.css?v=2.0.0");       /* Estilos base y reset */
+@import url("layout.css?v=2.0.0");          /* Layout principal y grid */
+@import url("components.css?v=2.0.0");      /* Componentes reutilizables */
+@import url("editor.css?v=2.0.0");          /* Editor de texto principal */
+@import url("seo.css?v=2.0.0");            /* Estilos para contenido SEO */
+@import url("modals.css?v=2.0.0");          /* Sistema de modales personalizado */
+@import url("responsive.css?v=2.0.0");      /* Media queries y responsive */
+@import url("feature.css?v=2.0.0");        /* Features grid y características */
 
 /* === Estilos adicionales === */
 

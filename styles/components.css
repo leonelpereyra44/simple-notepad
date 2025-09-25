@@ -195,7 +195,162 @@ button:disabled:hover {
   font-weight: 700;
 }
 
+/* --- Barra de estado --- */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.char-counter {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
 /* Input file oculto */
 #fileInput {
   display: none;
+}
+
+/* --- Menú de acciones con 3 puntos --- */
+.actions-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.actions-menu-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+  min-width: 36px;
+  text-align: center;
+  letter-spacing: -1px;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.actions-menu-toggle:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.actions-menu-toggle:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.actions-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.actions-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.actions-menu .menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 18px;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 12px;
+  position: relative;
+}
+
+.actions-menu .menu-item:last-child {
+  border-bottom: none;
+}
+
+.actions-menu .menu-item:hover {
+  background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(var(--accent-rgb), 0.05) 100%);
+  color: var(--accent);
+  padding-left: 22px;
+}
+
+.actions-menu .menu-item:active {
+  background: var(--accent-light);
+  transform: scale(0.98);
+}
+
+.actions-menu .menu-item.primary {
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.actions-menu .menu-item.primary:hover {
+  background: rgba(var(--accent-rgb), 0.15);
+}
+
+/* Mostrar solo desktop por defecto */
+.desktop-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.actions-menu-container {
+  display: none;
+}
+
+/* Estilos para botones con cambios no guardados */
+.btn.has-changes {
+  background: var(--warning) !important;
+  border-color: var(--warning) !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+  animation: pulseButton 2s infinite;
+}
+
+.btn.has-changes:hover {
+  background: #e0a800 !important;
+  transform: translateY(-1px);
+}
+
+@keyframes pulseButton {
+  0%, 100% { 
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+  }
+  50% { 
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.5);
+  }
 }

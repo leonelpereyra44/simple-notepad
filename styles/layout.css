@@ -80,12 +80,28 @@ header .small {
 /* --- Toolbar mejorado --- */
 .toolbar {
   display: flex;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-bottom: 1px solid var(--border);
+  justify-content: space-between;
   align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border);
   background: var(--border-light);
-  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+/* Lado izquierdo: archivo + editar */
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Lado derecho: menú */
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .filename {
@@ -94,17 +110,44 @@ header .small {
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
   background: var(--card);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  min-width: 0;
+  max-width: 200px;
 }
 
 .filename span {
   font-family: var(--font-mono);
   color: var(--accent);
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Indicador de cambios no guardados */
+.filename.unsaved {
+  border-color: var(--warning);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(255, 193, 7, 0.1) 100%);
+}
+
+.filename.unsaved span {
+  color: var(--warning);
+}
+
+.filename.unsaved::before {
+  content: '●';
+  color: var(--warning);
+  margin-right: 4px;
+  font-size: 12px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .chip {

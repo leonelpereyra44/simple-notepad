@@ -156,33 +156,55 @@
         <div class="small" itemprop="description">Editor de texto simple para archivos .txt - Sin instalación</div>
       </div>
 
-      <!-- Botón hamburguesa -->
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">&#9776;</button>
 
-      <!-- Menú de controles -->
-      <div class="controls" id="menu">
-        <button id="newBtn" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
-        <button id="openBtn" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
-        <input id="fileInput" type="file" accept=".txt,text/plain" />
-        <button id="saveBtn" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-        <button id="saveAsBtn" class="secondary" title="Guardar como">Guardar como</button>
-      </div>
     </header>
 
     <div class="toolbar">
-      <div class="filename" id="filenameDisplay">Archivo: <span id="filename">sin_nombre.txt</span></div>
-      <button id="renameBtn" title="Cambiar nombre" aria-label="Cambiar nombre del archivo">
-        <img src="media/icons8-editar-16.png" alt="Icono editar nombre de archivo" width="16" height="16" loading="lazy">
-      </button>
+      <!-- Lado izquierdo: Nombre del archivo + ícono de editar -->
+      <div class="toolbar-left">
+        <div class="filename" id="filenameDisplay">
+          <span id="filename">sin_nombre.txt</span>
+        </div>
+        <button id="renameBtn" title="Cambiar nombre" aria-label="Cambiar nombre del archivo">
+          <img src="media/icons8-editar-16.png" alt="Icono editar nombre de archivo" width="16" height="16" loading="lazy">
+        </button>
+      </div>
       
-      <div style="width:12px"></div>
-      <div style="flex:1"></div>
-      <div class="chip">Tamaño: <span id="chars">0</span> caracteres</div>
+      <!-- Lado derecho: Menú de acciones -->
+      <div class="toolbar-right">
+        <!-- Menú de 3 puntos para móvil -->
+        <div class="actions-menu-container">
+          <button id="actionsMenuBtn" class="actions-menu-toggle" title="Menú de acciones" aria-label="Menú de acciones">
+            ⋮
+          </button>
+          <div id="actionsMenu" class="actions-menu">
+            <button id="menuNewBtn" class="menu-item" title="Nuevo (Ctrl+N)">📄 Nuevo</button>
+            <button id="menuOpenBtn" class="menu-item" title="Abrir (Ctrl+O)">📂 Abrir</button>
+            <button id="menuSaveBtn" class="menu-item primary" title="Guardar (Ctrl+S)">💾 Guardar</button>
+            <button id="menuSaveAsBtn" class="menu-item" title="Guardar como">📥 Guardar como</button>
+          </div>
+        </div>
+        
+        <!-- Botones para desktop (se ocultan en móvil) -->
+        <div class="desktop-actions">
+          <button id="newBtnDesktop" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
+          <button id="openBtnDesktop" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
+          <button id="saveBtnDesktop" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
+          <button id="saveAsBtnDesktop" class="secondary" title="Guardar como">Guardar como</button>
+        </div>
+        
+        <input id="fileInput" type="file" accept=".txt,text/plain" />
+      </div>
     </div>
 
     <main class="editor" role="main" aria-label="Editor de texto principal">
       <textarea id="editor" placeholder="Escribe tu texto aquí..." spellcheck="false" aria-label="Área de edición de texto" rows="20"></textarea>
     </main>
+    
+    <div class="status-bar">
+      <div id="statusInfo">Línea 1, Columna 1</div>
+      <div class="char-counter">Caracteres: <span id="charCount">0</span></div>
+    </div>
     <section class="atajos">
       <div class="kb">
         Atajos: <strong>Ctrl/Cmd + S</strong> guardar — 
@@ -271,7 +293,7 @@
   <div id="modal-container" aria-hidden="true"></div>
 
   <!-- Scripts con carga optimizada -->
-  <script src="scripts/main.js" async></script>
+  <script type="module" src="scripts/app.js"></script>
   
   <!-- Service Worker para PWA (opcional) -->
   <script>

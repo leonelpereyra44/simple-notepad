@@ -9,7 +9,9 @@ Disallow: /test/
 Disallow: /tmp/
 Disallow: /scripts/
 Disallow: /*.js$
-Disallow: /ads.txt
+
+# Permitir acceso específico a ads.txt (importante para AdSense)
+Allow: /ads.txt
 
 # Crawl-delay para ser amigable con los servidores
 Crawl-delay: 1

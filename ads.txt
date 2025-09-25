@@ -1,1 +1,5 @@
+# ads.txt file for asimplenotepad.com
+# More information: https://iabtechlab.com/ads-txt/
+# Last updated: 2025-09-24
+
 google.com, pub-5996058227168327, DIRECT, f08c47fec0942fa0

@@ -256,5 +256,5 @@ class AdManager {
   }
 }
 
-// Exportar para uso en otros módulos
-export { AdManager };
+// Hacer AdManager disponible globalmente
+window.AdManager = AdManager;

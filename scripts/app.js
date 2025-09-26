@@ -7,14 +7,14 @@ import CustomModal from './modules/modals.js';
 import FileManager from './modules/fileManager.js';
 import TextEditor from './modules/editor.js';
 import UIManager from './modules/ui.js';
-import { AdManager } from './modules/adManager.js';
+// AdManager será cargado después de que el archivo se ejecute
 
 class SimpleNotepadApp {
   constructor() {
     this.fileManager = new FileManager();
     this.textEditor = new TextEditor();
     this.uiManager = new UIManager();
-    this.adManager = new AdManager();
+    this.adManager = null; // Se inicializará después
     
     this.isInitialized = false;
   }
@@ -46,7 +46,12 @@ class SimpleNotepadApp {
       this.fileManager.initialize(editor, filenameSpan);
       this.textEditor.initialize(editor, charCount, wordCount, lineCount, statusInfo);
       this.uiManager.initialize();
-      this.adManager.initialize();
+      
+      // Inicializar AdManager si está disponible
+      if (typeof AdManager !== 'undefined') {
+        this.adManager = new AdManager();
+        this.adManager.initialize();
+      }
       
       // Conectar detección de cambios
       if (editor) {
@@ -253,7 +258,9 @@ class SimpleNotepadApp {
       console.log('Text Editor:', this.textEditor);
       console.log('UI Manager:', this.uiManager);
       console.log('Ad Manager:', this.adManager);
-      this.adManager.debug();
+      if (this.adManager) {
+        this.adManager.debug();
+      }
     }
   }
 

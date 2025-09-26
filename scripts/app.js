@@ -48,9 +48,14 @@ class SimpleNotepadApp {
       this.uiManager.initialize();
       
       // Inicializar AdManager si está disponible
+      console.log('🔍 Checking AdManager availability:', typeof AdManager);
       if (typeof AdManager !== 'undefined') {
+        console.log('✅ AdManager found, initializing...');
         this.adManager = new AdManager();
         this.adManager.initialize();
+        console.log('✅ AdManager initialized successfully');
+      } else {
+        console.log('❌ AdManager not found, will remain null');
       }
       
       // Conectar detección de cambios
@@ -279,6 +284,7 @@ const app = new SimpleNotepadApp();
 app.init();
 
 // Exportar para uso global si es necesario
+window.app = app;
 window.SimpleNotepadApp = app;
 
 // Exportar para módulos ES6

@@ -274,13 +274,17 @@
       }
 
       enableAdvertising() {
-        console.log('✅ Publicidad personalizada habilitada');
-        // Aquí irían las llamadas reales a AdSense cuando lo implementes
+        // Emitir evento para que AdManager lo maneje
+        document.dispatchEvent(new CustomEvent('advertisingConsentChanged', {
+          detail: { granted: true }
+        }));
       }
 
       disableAdvertising() {
-        console.log('❌ Publicidad personalizada deshabilitada');
-        // Eliminar cookies de publicidad
+        // Emitir evento para que AdManager lo maneje
+        document.dispatchEvent(new CustomEvent('advertisingConsentChanged', {
+          detail: { granted: false }
+        }));
       }
 
       loadCurrentPreferences() {

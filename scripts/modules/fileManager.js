@@ -18,11 +18,6 @@ class FileManager {
     this.editor = editor;
     this.filenameSpan = filenameSpan;
     
-    console.log('📁 FileManager inicializado:', { 
-      editor: !!editor, 
-      filenameSpan: !!filenameSpan 
-    });
-    
     // Cargar datos guardados
     this.loadFromLocalStorage();
   }

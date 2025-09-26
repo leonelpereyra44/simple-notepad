@@ -39,14 +39,6 @@ class TextEditor {
     this.lineCount = lineCountElement;
     this.statusInfo = statusInfoElement;
     
-    console.log('📝 TextEditor inicializado:', { 
-      editor: !!editorElement,
-      charCount: !!charCountElement,
-      wordCount: !!wordCountElement,
-      lineCount: !!lineCountElement,
-      statusInfo: !!statusInfoElement
-    });
-    
     if (this.editor) {
       this.setupEventListeners();
       this.updateStats();

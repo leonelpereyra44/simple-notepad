@@ -35,15 +35,10 @@ class SimpleNotepadApp {
       const lineCount = document.getElementById("lineCount");
       const statusInfo = document.getElementById("statusInfo");
 
-      // Debug: verificar elementos DOM
-      console.log('🔍 Elementos DOM encontrados:', {
-        editor: !!editor,
-        filenameSpan: !!filenameSpan, 
-        charCount: !!charCount,
-        wordCount: !!wordCount,
-        lineCount: !!lineCount,
-        statusInfo: !!statusInfo
-      });
+      // Verificar elementos DOM esenciales
+      if (!editor || !filenameSpan) {
+        throw new Error('Elementos DOM críticos no encontrados');
+      }
 
       // Inicializar módulos
       this.fileManager.initialize(editor, filenameSpan);
@@ -55,7 +50,6 @@ class SimpleNotepadApp {
         editor.addEventListener('input', () => {
           this.fileManager.onContentChange();
         });
-        console.log('✅ Listener de cambios configurado');
       }
 
       // Configurar callbacks entre módulos
@@ -65,7 +59,6 @@ class SimpleNotepadApp {
       this.setupAdditionalEvents();
 
       this.isInitialized = true;
-      console.log('Simple Notepad App inicializada correctamente');
 
       // Mostrar mensaje de bienvenida si es primera vez
       this.showWelcomeMessage();
@@ -250,10 +243,13 @@ class SimpleNotepadApp {
 
   // Método para debugging
   debug() {
-    console.log('App Info:', this.getAppInfo());
-    console.log('File Manager:', this.fileManager);
-    console.log('Text Editor:', this.textEditor);
-    console.log('UI Manager:', this.uiManager);
+    // Debug info solo disponible en desarrollo
+    if (location.hostname === 'localhost' || location.protocol === 'file:') {
+      console.log('App Info:', this.getAppInfo());
+      console.log('File Manager:', this.fileManager);
+      console.log('Text Editor:', this.textEditor);
+      console.log('UI Manager:', this.uiManager);
+    }
   }
 
   // Limpiar recursos
@@ -261,8 +257,6 @@ class SimpleNotepadApp {
     // Limpiar event listeners si es necesario
     // Guardar estado final
     this.fileManager.saveToLocalStorage();
-    
-    console.log('Simple Notepad App destruida');
   }
 }
 

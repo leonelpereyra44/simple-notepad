@@ -1,5 +1,4 @@
-// Debug: Verificar que el script se está cargando
-console.log('📝 Simple Notepad - Script cargado correctamente');
+// Simple Notepad - Main Script
 
 // === Sistema de Modales Personalizado ===
 class CustomModal {
@@ -426,16 +425,11 @@ function initializeHamburgerMenu() {
   const menuToggle = document.getElementById("menuToggle");
   const menu = document.getElementById("menu");
 
-  console.log('Inicializando menú hamburguesa...', { menuToggle, menu });
-
   if (menuToggle && menu) {
-    console.log('Elementos del menú encontrados, configurando eventos...');
-    
     // Abrir/cerrar menú
     menuToggle.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      console.log('Toggle menu clicked');
       
       const isVisible = menu.classList.contains("show");
       if (isVisible) {
@@ -450,7 +444,6 @@ function initializeHamburgerMenu() {
     // Cerrar menú al hacer click en un botón dentro
     menu.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", () => {
-        console.log('Menu button clicked, closing menu');
         menu.classList.remove("show");
         menuToggle.setAttribute('aria-expanded', 'false');
       });
@@ -475,7 +468,6 @@ function initializeHamburgerMenu() {
 
     // Inicializar aria-expanded
     menuToggle.setAttribute('aria-expanded', 'false');
-    console.log('Menú hamburguesa inicializado correctamente');
   } else {
     console.error('No se pudieron encontrar los elementos del menú hamburguesa');
   }

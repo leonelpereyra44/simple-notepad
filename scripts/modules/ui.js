@@ -14,11 +14,9 @@ class UIManager {
 
   // Inicializar el gestor de UI
   initialize() {
-    console.log('🎨 UIManager inicializando...');
     this.setupMenuItems();
     this.setupActionsMenu();
     this.setupThemeToggle();
-    console.log('✅ UIManager inicializado correctamente');
   }
 
   // Configurar menú hamburguesa
@@ -52,7 +50,6 @@ class UIManager {
           e.preventDefault();
           this.handleMenuAction(action);
         });
-        console.log(`✅ Configurado botón desktop: ${id} -> ${action}`);
       }
     });
 
@@ -72,11 +69,8 @@ class UIManager {
           this.hideActionsMenu();
           this.handleMenuAction(action);
         });
-        console.log(`✅ Configurado botón móvil: ${id} -> ${action}`);
       }
     });
-    
-    console.log('✅ Todos los botones configurados correctamente');
   }
 
   // Manejar acciones del menú
@@ -108,8 +102,7 @@ class UIManager {
       this.menu.classList.add('show');
       this.hamburgerBtn.classList.add('active');
       this.isMenuOpen = true;
-      
-      console.log('✅ Menú abierto');
+
     }
   }
 
@@ -119,8 +112,7 @@ class UIManager {
       this.menu.classList.remove('show');
       this.hamburgerBtn.classList.remove('active');
       this.isMenuOpen = false;
-      
-      console.log('❌ Menú cerrado');
+
     }
   }
 
@@ -171,7 +163,6 @@ class UIManager {
   toggleFullscreen() {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(err => {
-        console.log(`Error enabling fullscreen: ${err.message}`);
       });
     } else {
       document.exitFullscreen();
@@ -344,7 +335,6 @@ class UIManager {
     const menu = document.querySelector('.actions-menu');
     
     if (!toggleBtn || !menu) {
-      console.log('⚠️ Menú de 3 puntos no encontrado');
       return;
     }
     
@@ -352,7 +342,6 @@ class UIManager {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       menu.classList.toggle('show');
-      console.log('🔄 Toggle menú:', menu.classList.contains('show') ? 'abierto' : 'cerrado');
     });
     
     // Cerrar menú al hacer clic fuera
@@ -369,7 +358,6 @@ class UIManager {
       }
     });
 
-    console.log('✅ Menú de 3 puntos configurado correctamente');
   }
 
   // Ocultar menú de acciones

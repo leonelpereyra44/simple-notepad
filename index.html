@@ -144,9 +144,8 @@
   <meta name="revisit-after" content="7 days" />
   <meta name="language" content="Spanish" />
 
-  <!-- Estilos con optimización de carga -->
-  <link rel="preload" href="styles/style.css?v=2.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="styles/style.css?v=2.0.0" /></noscript>
+  <!-- Estilos con carga bloqueante para evitar FOUC -->
+  <link rel="stylesheet" href="styles/style.css?v=2.0.0" />
   <link rel="stylesheet" href="styles/legal.css?v=1.2" />
 
 </head>

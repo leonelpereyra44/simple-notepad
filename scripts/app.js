@@ -15,6 +15,7 @@ class SimpleNotepadApp {
     this.textEditor = new TextEditor();
     this.uiManager = new UIManager();
     this.adManager = null; // Se inicializará después
+
     
     this.isInitialized = false;
   }
@@ -46,6 +47,10 @@ class SimpleNotepadApp {
       this.fileManager.initialize(editor, filenameSpan);
       this.textEditor.initialize(editor, charCount, wordCount, lineCount, statusInfo);
       this.uiManager.initialize();
+
+
+      
+
       
       // Inicializar AdManager si está disponible
       if (typeof AdManager !== 'undefined') {
@@ -100,7 +105,11 @@ class SimpleNotepadApp {
     this.uiManager.registerCallback('saveFile', () => this.fileManager.saveFile());
     this.uiManager.registerCallback('saveAsFile', () => this.fileManager.saveAsFile());
     this.uiManager.registerCallback('renameFile', () => this.fileManager.renameFile());
+
+
   }
+
+
 
   // Configurar eventos adicionales
   setupAdditionalEvents() {
@@ -248,6 +257,24 @@ class SimpleNotepadApp {
       isInitialized: this.isInitialized
     };
   }
+
+  // Actualizar interfaz de usuario
+  updateUI() {
+    // Actualizar contadores de texto
+    if (this.textEditor) {
+      this.textEditor.updateCounts();
+    }
+
+    // Actualizar estado de los botones si es necesario
+    if (this.uiManager) {
+      this.uiManager.updateButtonStates();
+    }
+
+    // Actualizar otros elementos de UI según sea necesario
+    console.log('🔄 UI updated');
+  }
+
+
 
   // Método para debugging
   debug() {

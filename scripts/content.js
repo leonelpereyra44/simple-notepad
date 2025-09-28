@@ -209,6 +209,296 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Función para copiar templates
+function copyTemplate(templateId) {
+    const templates = {
+        'blog-template': `# Título del Artículo
+
+## Introducción
+[Escribe una introducción atractiva que enganche al lector]
+
+## Desarrollo
+
+### Subtítulo 1
+[Contenido principal del primer punto]
+
+### Subtítulo 2  
+[Contenido principal del segundo punto]
+
+### Subtítulo 3
+[Contenido principal del tercer punto]
+
+## Conclusión
+[Resume los puntos clave y ofrece una reflexión final]
+
+---
+Palabras clave: [palabra1, palabra2, palabra3]
+Fecha: ${new Date().toLocaleDateString('es-ES')}`,
+
+        'proposal-template': `# PROPUESTA: [Título del Proyecto]
+
+## RESUMEN EJECUTIVO
+[Breve descripción del proyecto y objetivos principales]
+
+## OBJETIVOS
+- Objetivo principal: [Describir objetivo principal]
+- Objetivos específicos:
+  • [Objetivo 1]
+  • [Objetivo 2] 
+  • [Objetivo 3]
+
+## ALCANCE DEL PROYECTO
+### Incluye:
+- [Elemento 1]
+- [Elemento 2]
+- [Elemento 3]
+
+### No incluye:
+- [Exclusión 1]
+- [Exclusión 2]
+
+## METODOLOGÍA
+1. **Fase 1:** [Descripción fase inicial]
+2. **Fase 2:** [Descripción desarrollo]  
+3. **Fase 3:** [Descripción cierre]
+
+## CRONOGRAMA
+- **Inicio:** [Fecha]
+- **Hito 1:** [Fecha] - [Descripción]
+- **Hito 2:** [Fecha] - [Descripción]
+- **Entrega final:** [Fecha]
+
+## PRESUPUESTO
+| Concepto | Cantidad | Precio |
+|----------|----------|---------|
+| [Item 1] | [X] | [Precio] |
+| [Item 2] | [X] | [Precio] |
+| **TOTAL** |  | **[Total]** |
+
+## BENEFICIOS ESPERADOS
+- [Beneficio 1]
+- [Beneficio 2]
+- [Beneficio 3]
+
+---
+Elaborado por: [Tu nombre]
+Fecha: ${new Date().toLocaleDateString('es-ES')}`,
+
+        'report-template': `# REPORTE: [Título del Reporte]
+
+**Fecha:** ${new Date().toLocaleDateString('es-ES')}
+**Elaborado por:** [Tu nombre]
+**Periodo:** [Fecha inicio - Fecha fin]
+
+## RESUMEN EJECUTIVO
+[Resumen de 2-3 párrafos con los puntos más importantes]
+
+## METODOLOGÍA
+[Explicar cómo se obtuvieron los datos y se realizó el análisis]
+
+## RESULTADOS PRINCIPALES
+
+### Hallazgo 1: [Título]
+- **Descripción:** [Detalle del hallazgo]
+- **Impacto:** [Nivel de importancia]
+- **Datos:** [Cifras o evidencia]
+
+### Hallazgo 2: [Título]  
+- **Descripción:** [Detalle del hallazgo]
+- **Impacto:** [Nivel de importancia]
+- **Datos:** [Cifras o evidencia]
+
+### Hallazgo 3: [Título]
+- **Descripción:** [Detalle del hallazgo] 
+- **Impacto:** [Nivel de importancia]
+- **Datos:** [Cifras o evidencia]
+
+## ANÁLISIS DE TENDENCIAS
+[Identificar patrones y tendencias observadas]
+
+## RIESGOS IDENTIFICADOS
+1. **Riesgo Alto:** [Descripción y mitigación]
+2. **Riesgo Medio:** [Descripción y mitigación]
+3. **Riesgo Bajo:** [Descripción y monitoreo]
+
+## RECOMENDACIONES
+
+### Acción Inmediata
+- [ ] [Acción 1] - Responsable: [Persona] - Fecha: [Fecha]
+- [ ] [Acción 2] - Responsable: [Persona] - Fecha: [Fecha]
+
+### Mediano Plazo  
+- [ ] [Acción 1] - Responsable: [Persona] - Fecha: [Fecha]
+- [ ] [Acción 2] - Responsable: [Persona] - Fecha: [Fecha]
+
+## CONCLUSIONES
+[Síntesis final y próximos pasos]
+
+---
+**Próxima revisión:** [Fecha]
+**Distribución:** [Lista de destinatarios]`,
+
+        'content-plan-template': `# PLAN DE CONTENIDO: [Mes/Trimestre/Año]
+
+## OBJETIVOS
+- **Objetivo principal:** [Describir meta principal]
+- **Métricas clave:** 
+  • [Métrica 1]: [Meta numérica]
+  • [Métrica 2]: [Meta numérica]
+  • [Métrica 3]: [Meta numérica]
+
+## AUDIENCIA OBJETIVO
+- **Demografía:** [Edad, ubicación, intereses]
+- **Necesidades:** [Qué problemas resolvemos]
+- **Canales preferidos:** [Donde consume contenido]
+
+## CALENDARIO EDITORIAL
+
+### SEMANA 1
+**Lunes:** [Tipo de contenido] - [Título/Tema]
+**Miércoles:** [Tipo de contenido] - [Título/Tema]  
+**Viernes:** [Tipo de contenido] - [Título/Tema]
+
+### SEMANA 2
+**Lunes:** [Tipo de contenido] - [Título/Tema]
+**Miércoles:** [Tipo de contenido] - [Título/Tema]
+**Viernes:** [Tipo de contenido] - [Título/Tema]
+
+### SEMANA 3
+**Lunes:** [Tipo de contenido] - [Título/Tema]
+**Miércoles:** [Tipo de contenido] - [Título/Tema]
+**Viernes:** [Tipo de contenido] - [Título/Tema]
+
+### SEMANA 4
+**Lunes:** [Tipo de contenido] - [Título/Tema]
+**Miércoles:** [Tipo de contenido] - [Título/Tema]
+**Viernes:** [Tipo de contenido] - [Título/Tema]
+
+## TIPOS DE CONTENIDO
+
+### Educativo (40%)
+- Tutoriales
+- Guías paso a paso
+- Tips y consejos
+
+### Entretenimiento (30%)
+- Historias personales
+- Contenido viral
+- Humor relacionado
+
+### Promocional (20%)
+- Productos/servicios
+- Testimonios
+- Ofertas especiales  
+
+### Interactivo (10%)
+- Preguntas al audience
+- Encuestas
+- Contenido generado por usuarios
+
+## PALABRAS CLAVE OBJETIVO
+1. [Palabra clave 1] - Volumen: [X] - Dificultad: [Baja/Media/Alta]
+2. [Palabra clave 2] - Volumen: [X] - Dificultad: [Baja/Media/Alta]  
+3. [Palabra clave 3] - Volumen: [X] - Dificultad: [Baja/Media/Alta]
+
+## RECURSOS NECESARIOS
+- **Herramientas:** [Lista de tools needed]
+- **Personal:** [Roles y responsabilidades]
+- **Presupuesto:** [Costo estimado]
+
+## MEDICIÓN Y ANÁLISIS
+- **Revisión semanal:** [Qué métricas revisar]
+- **Reporte mensual:** [KPIs principales]
+- **Ajustes:** [Criterios para modificar el plan]
+
+---
+**Creado:** ${new Date().toLocaleDateString('es-ES')}
+**Próxima revisión:** [Fecha]`
+    };
+    
+    const templateContent = templates[templateId];
+    
+    if (templateContent) {
+        // Copiar al clipboard
+        navigator.clipboard.writeText(templateContent).then(() => {
+            // Mostrar confirmación
+            showCopyConfirmation();
+        }).catch(err => {
+            console.error('Error al copiar:', err);
+            // Fallback para navegadores antiguos
+            fallbackCopyTextToClipboard(templateContent);
+        });
+    } else {
+        alert('Template no encontrado');
+    }
+}
+
+// Función de fallback para copiar texto
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showCopyConfirmation();
+    } catch (err) {
+        alert('No se pudo copiar el template');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Mostrar confirmación de copiado
+function showCopyConfirmation() {
+    // Crear elemento de confirmación
+    const confirmation = document.createElement('div');
+    confirmation.innerHTML = '✅ Template copiado al portapapeles';
+    confirmation.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        font-weight: 500;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    // Agregar animación CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(confirmation);
+    
+    // Remover después de 3 segundos
+    setTimeout(() => {
+        confirmation.style.animation = 'slideIn 0.3s ease reverse';
+        setTimeout(() => {
+            if (confirmation.parentNode) {
+                confirmation.parentNode.removeChild(confirmation);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Hacer la función global para que funcione desde HTML
+window.copyTemplate = copyTemplate;
+
 // Agregar botón scroll to top si la página es larga
 if (document.body.scrollHeight > window.innerHeight * 2) {
     const scrollBtn = document.createElement('button');

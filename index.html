@@ -171,6 +171,7 @@
         <button id="renameBtn" title="Cambiar nombre" aria-label="Cambiar nombre del archivo">
           <img src="media/icons8-editar-16.png" alt="Icono editar nombre de archivo" width="16" height="16" loading="lazy">
         </button>
+        <button id="emojiBtn" title="Insertar emoji" aria-label="Insertar emoji">😀</button>
       </div>
       
       <!-- Lado derecho: Menú de acciones -->
@@ -190,10 +191,10 @@
         
         <!-- Botones para desktop (se ocultan en móvil) -->
         <div class="desktop-actions">
-          <button id="newBtnDesktop" class="secondary" title="Nuevo (Ctrl+N)">Nuevo</button>
-          <button id="openBtnDesktop" class="secondary" title="Abrir (Ctrl+O)">Abrir</button>
-          <button id="saveBtnDesktop" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-          <button id="saveAsBtnDesktop" class="secondary" title="Guardar como">Guardar como</button>
+          <button id="newBtnDesktop" class="secondary" title="Nuevo (Ctrl+N)">📄 Nuevo</button>
+          <button id="openBtnDesktop" class="secondary" title="Abrir (Ctrl+O)">📂 Abrir</button>
+          <button id="saveBtnDesktop" class="primary" title="Guardar (Ctrl+S)">💾 Guardar</button>
+          <button id="saveAsBtnDesktop" class="secondary" title="Guardar como">📥 Guardar como</button>
         </div>
         
         <input id="fileInput" type="file" accept=".txt,text/plain" />
@@ -203,6 +204,22 @@
     <main class="editor" role="main" aria-label="Editor de texto principal">
       <textarea id="editor" placeholder="Escribe tu texto aquí..." spellcheck="false" aria-label="Área de edición de texto" rows="20"></textarea>
     </main>
+    
+    <!-- Panel de Emojis -->
+    <div id="emojiPanel" class="emoji-panel hidden">
+      <div class="emoji-header">
+        <div class="emoji-categories">
+          <button class="emoji-category-btn active" data-category="recent" title="Recientes">⏰</button>
+          <button class="emoji-category-btn" data-category="smileys" title="Caras">😀</button>
+          <button class="emoji-category-btn" data-category="work" title="Trabajo">📝</button>
+          <button class="emoji-category-btn" data-category="symbols" title="Símbolos">⭐</button>
+        </div>
+        <button id="emojiCloseBtn" class="emoji-close" title="Cerrar">×</button>
+      </div>
+      <div class="emoji-grid" id="emojiGrid">
+        <!-- Los emojis se cargan dinámicamente -->
+      </div>
+    </div>
     
     <div class="status-bar">
       <div id="statusInfo">Línea 1, Columna 1</div>
@@ -442,6 +459,14 @@
     })();
   </script>
   
+  <!-- Módulos de la aplicación -->
+  <script src="scripts/modules/emojiManager.js?v=1.0.0"></script>
+  <script src="scripts/modules/adManager.js?v=1.0.0"></script>
+  <script src="scripts/modules/ui.js?v=1.2.0"></script>
+  <script src="scripts/modules/fileManager.js?v=1.4.0"></script>
+  <script src="scripts/modules/modals.js?v=1.1.0"></script>
+  <script src="scripts/app.js?v=2.1.0"></script>
+  
   <!-- Service Worker para PWA (opcional) -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -451,8 +476,5 @@
       });
     }
   </script>
-</body>
-</html>
-  
 </body>
 </html>

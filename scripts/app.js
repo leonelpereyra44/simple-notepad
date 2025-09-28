@@ -48,10 +48,11 @@ class SimpleNotepadApp {
       this.textEditor.initialize(editor, charCount, wordCount, lineCount, statusInfo);
       this.uiManager.initialize();
 
+      // Inicializar EmojiManager si está disponible
+      if (typeof EmojiManager !== 'undefined') {
+        this.emojiManager = new EmojiManager(editor);
+      }
 
-      
-
-      
       // Inicializar AdManager si está disponible
       if (typeof AdManager !== 'undefined') {
         this.adManager = new AdManager();
@@ -142,6 +143,14 @@ class SimpleNotepadApp {
     setInterval(() => {
       this.fileManager.saveToLocalStorage();
     }, 30000); // Cada 30 segundos
+  }
+
+  // Método público para actualizar estado (usado por EmojiManager)
+  updateStatus() {
+    if (this.textEditor) {
+      this.textEditor.updateStats();
+      this.textEditor.updateStatus();
+    }
   }
 
   // Mostrar mensaje de bienvenida

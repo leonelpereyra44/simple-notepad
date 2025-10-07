@@ -167,7 +167,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: var(--shadow-lg);
-  width: 320px;
+  width: 360px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 120px);
   z-index: 1000;
@@ -189,18 +189,21 @@
 
 .emoji-categories {
   display: flex;
-  gap: 4px;
+  gap: 2px;
+  flex-wrap: wrap;
+  max-width: calc(100% - 40px);
 }
 
 .emoji-category-btn {
   background: none;
   border: none;
-  font-size: 18px;
-  padding: 6px 8px;
+  font-size: 16px;
+  padding: 4px 6px;
   border-radius: 4px;
   cursor: pointer;
   transition: all var(--transition);
   opacity: 0.6;
+  flex-shrink: 0;
 }
 
 .emoji-category-btn:hover {
@@ -233,10 +236,10 @@
 
 .emoji-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 2px;
   padding: 8px;
-  max-height: 200px;
+  max-height: 240px;
   overflow-y: auto;
 }
 
@@ -289,9 +292,14 @@
     max-height: calc(100vh - 90px);
   }
   
+  .emoji-categories {
+    gap: 1px;
+    justify-content: space-between;
+  }
+  
   .emoji-grid {
-    grid-template-columns: repeat(6, 1fr);
-    max-height: 160px;
+    grid-template-columns: repeat(8, 1fr);
+    max-height: 200px;
   }
   
   .emoji-item {
@@ -304,8 +312,9 @@
   }
   
   .emoji-category-btn {
-    font-size: 16px;
-    padding: 4px 6px;
+    font-size: 14px;
+    padding: 3px 4px;
+    min-width: auto;
   }
 }
 

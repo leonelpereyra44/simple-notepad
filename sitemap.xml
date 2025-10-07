@@ -1,108 +1,121 @@
-<?xml version="1.0" encoding="  <!-- Blog de Productividad -->
-  <url>
-    <loc>https://asimplenotepad.com/blog.html</loc>
-    <lastmod>2025-09-27T12:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Recursos y Plantillas -->
-  <url>
-    <loc>https://asimplenotepad.com/recursos.html</loc>
-    <lastmod>2025-09-27T12:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Tutorial Completo -->
-  <url>
-    <loc>https://asimplenotepad.com/tutorial.html</loc>
-    <lastmod>2025-09-27T12:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap actualizado: 2025-10-06 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
-        http://www.google.com/schemas/sitemap-image/1.1
-        http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
-
-  <!-- Página Principal - Bloc de Notas Online -->
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Home -->
   <url>
     <loc>https://asimplenotepad.com/</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://asimplenotepad.com/media/favicon/icons8-bloc-parakeet-color-96.png</image:loc>
       <image:title>Bloc de Notas Online - Editor de Texto Gratuito</image:title>
-      <image:caption>Logo del editor de texto online gratuito A Simple Notepad</image:caption>
+      <image:caption>Logo del editor de texto online A Simple Notepad</image:caption>
     </image:image>
   </url>
 
-  <!-- Página de Index alternativa (por si acaso) -->
+  <!-- Alternativa explícita -->
   <url>
     <loc>https://asimplenotepad.com/index.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Tutorial - Guía de uso -->
+  <!-- Blog listado -->
   <url>
-    <loc>https://asimplenotepad.com/tutorial.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <loc>https://asimplenotepad.com/blog.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Artículos individuales -->
+  <url>
+    <loc>https://asimplenotepad.com/organizacion-digital-estudiantes.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://asimplenotepad.com/notas-eficientes-captura-rapida.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://asimplenotepad.com/tecnicas-memoria-notas.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- FAQ - Preguntas frecuentes -->
+  <!-- Tutorial y recursos de uso -->
   <url>
-    <loc>https://asimplenotepad.com/faq.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <loc>https://asimplenotepad.com/tutorial.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
-
-  <!-- Contacto - Soporte al usuario -->
   <url>
-    <loc>https://asimplenotepad.com/contact.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <loc>https://asimplenotepad.com/recursos.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
-  <!-- Política de Privacidad - Cumplimiento RGPD -->
+  <!-- Soporte / interacción -->
+  <url>
+    <loc>https://asimplenotepad.com/faq.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://asimplenotepad.com/contact.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legales / corporativo -->
+  <url>
+    <loc>https://asimplenotepad.com/about.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://asimplenotepad.com/terms.html</loc>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://asimplenotepad.com/privacy.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
-
-  <!-- Política de Cookies - Cumplimiento RGPD -->
   <url>
     <loc>https://asimplenotepad.com/cookies.html</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
 
-  <!-- Recursos importantes para SEO -->
+  <!-- Infraestructura -->
   <url>
     <loc>https://asimplenotepad.com/sitemap.xml</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
-
   <url>
     <loc>https://asimplenotepad.com/robots.txt</loc>
-    <lastmod>2025-09-25T12:00:00+00:00</lastmod>
+    <lastmod>2025-10-06T12:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
-
 </urlset>

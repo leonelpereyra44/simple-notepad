@@ -40,7 +40,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
   
-  <!-- Google AdSense será cargado dinámicamente por AdManager -->
+  <!-- Google AdSense (script requerido para verificación; consentimiento gestionado dinámicamente) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5996058227168327" crossorigin="anonymous"></script>
   
   <!-- Enhanced Structured Data -->
   <script type="application/ld+json">
@@ -77,9 +78,17 @@
       "description": "Editor de texto online gratuito y simple para crear archivos .txt",
       "publisher": {
         "@type": "Person",
+        "@id": "https://asimplenotepad.com/#owner",
         "name": "Leonel Pereyra"
       },
       "inLanguage": "es-ES"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://asimplenotepad.com/#owner",
+      "name": "Leonel Pereyra",
+      "url": "https://asimplenotepad.com/",
+      "description": "Creador y responsable del proyecto Simple Notepad"
     },
     {
       "@type": "FAQPage",
@@ -210,9 +219,14 @@
       <div class="emoji-header">
         <div class="emoji-categories">
           <button class="emoji-category-btn active" data-category="recent" title="Recientes">⏰</button>
-          <button class="emoji-category-btn" data-category="smileys" title="Caras">😀</button>
-          <button class="emoji-category-btn" data-category="work" title="Trabajo">📝</button>
+          <button class="emoji-category-btn" data-category="smileys" title="Caras y emociones">😀</button>
+          <button class="emoji-category-btn" data-category="people" title="Personas y gestos">👋</button>
+          <button class="emoji-category-btn" data-category="nature" title="Animales y naturaleza">🌱</button>
+          <button class="emoji-category-btn" data-category="food" title="Comida y bebidas">🍎</button>
+          <button class="emoji-category-btn" data-category="travel" title="Viajes y lugares">✈️</button>
+          <button class="emoji-category-btn" data-category="work" title="Trabajo y objetos">📝</button>
           <button class="emoji-category-btn" data-category="symbols" title="Símbolos">⭐</button>
+          <button class="emoji-category-btn" data-category="objects" title="Deportes y música">⚽</button>
         </div>
         <button id="emojiCloseBtn" class="emoji-close" title="Cerrar">×</button>
       </div>
@@ -307,11 +321,13 @@
         </div>
         
         <div class="nav-section">
-          <h4>� Soporte</h4>
+          <h4>🛠️ Soporte</h4>
           <nav>
             <a href="contact.html">Contacto y soporte</a>
             <a href="privacy.html">Política de privacidad</a>
             <a href="cookies.html">Política de cookies</a>
+            <a href="terms.html">Términos</a>
+            <a href="about.html">Acerca</a>
           </nav>
         </div>
         
@@ -344,6 +360,8 @@
           <a href="privacy.html">Privacidad</a>
           <a href="cookies.html">Cookies</a>
           <a href="contact.html">Contacto</a>
+          <a href="terms.html">Términos</a>
+          <a href="about.html">Acerca</a>
         </nav>
       </div>
     </footer>
@@ -384,7 +402,6 @@
   </div>
 
   <!-- Scripts con carga optimizada -->
-  <script src="scripts/modules/adManager.js?v=1.0.0"></script>
   <script type="module" src="scripts/app.js?v=2.0.0"></script>
   
   <!-- Cookie Banner Script -->
@@ -466,6 +483,14 @@
   <script src="scripts/modules/fileManager.js?v=1.4.0"></script>
   <script src="scripts/modules/modals.js?v=1.1.0"></script>
   <script src="scripts/app.js?v=2.1.0"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.AdManager) {
+        window.adManager = new AdManager();
+        window.adManager.initialize();
+      }
+    });
+  </script>
   
   <!-- Service Worker para PWA (opcional) -->
   <script>

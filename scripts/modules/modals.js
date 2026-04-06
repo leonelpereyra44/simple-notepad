@@ -10,6 +10,13 @@ class CustomModal {
     this.isOpen = false;
   }
 
+  // Escapar HTML para prevenir XSS
+  static escapeHTML(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   createModal(type, title, message, buttons = []) {
     // Crear overlay si no existe
     if (!this.overlay) {
@@ -31,21 +38,25 @@ class CustomModal {
       confirm: '?'
     };
 
+    // Escapar title y message para prevenir XSS
+    const safeTitle = CustomModal.escapeHTML(title);
+    const safeMessage = CustomModal.escapeHTML(message);
+
     this.modal.innerHTML = `
       <div class="modal-header">
         <h3 class="modal-title">
           <span class="modal-icon ${type}">${icons[type] || icons.info}</span>
-          ${title}
+          ${safeTitle}
         </h3>
       </div>
       <div class="modal-body">
-        <p class="modal-message">${message}</p>
+        <p class="modal-message">${safeMessage}</p>
         ${type === 'prompt' ? '<input type="text" class="modal-input" placeholder="Ingrese el valor..." />' : ''}
       </div>
       <div class="modal-footer">
         ${buttons.map(btn => `
           <button class="modal-btn ${btn.class || ''}" data-action="${btn.action}">
-            ${btn.text}
+            ${CustomModal.escapeHTML(btn.text)}
           </button>
         `).join('')}
       </div>

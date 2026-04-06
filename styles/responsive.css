@@ -226,7 +226,8 @@
     font-size: var(--font-size-xs);
   }
   
-  .logo {
+  .logo,
+  .logo img {
     width: 36px;
     height: 36px;
   }
@@ -306,7 +307,8 @@
     font-size: var(--font-size-sm);
   }
   
-  .logo {
+  .logo,
+  .logo img {
     width: 32px;
     height: 32px;
   }

@@ -191,6 +191,26 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
+/* Background para modo oscuro con clase */
+body.dark-mode::before {
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, 
+      var(--bg) 0%, 
+      rgba(30, 41, 59, 0.8) 25%, 
+      var(--bg) 50%, 
+      rgba(96, 165, 250, 0.08) 75%, 
+      var(--bg) 100%
+    );
+}
+
+body.dark-mode::after {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(96, 165, 250, 0.2) 1px, transparent 0);
+  opacity: 0.2;
+}
+
 /* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 8px;

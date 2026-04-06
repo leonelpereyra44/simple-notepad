@@ -18,6 +18,7 @@
 @import url("modals.css?v=2.0.0");          /* Sistema de modales personalizado */
 @import url("responsive.css?v=2.0.0");      /* Media queries y responsive */
 @import url("feature.css?v=2.0.0");        /* Features grid y características */
+@import url("toolbar.css?v=2.1.0");        /* Barra de herramientas secundaria */
 
 /* === Estilos adicionales === */
 

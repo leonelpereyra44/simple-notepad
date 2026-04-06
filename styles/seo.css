@@ -237,6 +237,34 @@
   }
 }
 
+/* Dark mode support con clase */
+body.dark-mode .seo-text {
+  background: #1a202c;
+  border-color: #2d3748;
+  color: #e2e8f0;
+}
+
+body.dark-mode .seo-text h2,
+body.dark-mode .seo-text h3,
+body.dark-mode .seo-text h4 {
+  color: #f7fafc;
+}
+
+body.dark-mode .seo-text strong {
+  color: #f7fafc;
+}
+
+body.dark-mode .seo-text code {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #fbb6ce;
+}
+
+body.dark-mode .seo-text small {
+  border-color: #4a5568;
+  color: #a0aec0;
+}
+
 /* Print styles */
 @media print {
   .seo-text {

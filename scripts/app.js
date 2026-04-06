@@ -7,7 +7,7 @@ import CustomModal from './modules/modals.js';
 import FileManager from './modules/fileManager.js';
 import TextEditor from './modules/editor.js';
 import UIManager from './modules/ui.js';
-// AdManager será cargado después de que el archivo se ejecute
+import { logger } from './utils/logger.js';
 
 class SimpleNotepadApp {
   constructor() {
@@ -78,7 +78,7 @@ class SimpleNotepadApp {
       this.showWelcomeMessage();
 
     } catch (error) {
-      console.error('Error inicializando la aplicación:', error);
+      logger.error('Error inicializando la aplicación:', error);
       CustomModal.error('Error al inicializar la aplicación. Por favor, recarga la página.', 'Error de Inicialización');
     }
   }
@@ -107,10 +107,229 @@ class SimpleNotepadApp {
     this.uiManager.registerCallback('saveAsFile', () => this.fileManager.saveAsFile());
     this.uiManager.registerCallback('renameFile', () => this.fileManager.renameFile());
 
+    // Botones de la barra secundaria
+    this.setupSecondaryToolbar();
 
+    // Drag & Drop
+    this.setupDragAndDrop();
+
+    // Panel de atajos
+    this.setupShortcutsPanel();
+
+    // Dark mode toggle en header
+    this.setupDarkModeToggle();
+
+    // Fullscreen button
+    this.setupFullscreen();
+
+    // Save indicator sync
+    this.setupSaveIndicator();
   }
 
+  // Configurar barra de herramientas secundaria
+  setupSecondaryToolbar() {
+    const buttons = {
+      'undoBtn': () => this.textEditor.undo(),
+      'redoBtn': () => this.textEditor.redo(),
+      'findBtn': () => this.textEditor.findText(),
+      'replaceBtn': () => this.textEditor.replaceText(),
+      'duplicateBtn': () => this.textEditor.duplicateLine(),
+      'deleteLineBtn': () => this.textEditor.deleteLine(),
+      'commentBtn': () => this.textEditor.toggleComment(),
+      'exportPdfBtn': () => this.exportToPDF(),
+    };
 
+    Object.entries(buttons).forEach(([id, handler]) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          handler();
+        });
+      }
+    });
+  }
+
+  // Configurar Drag & Drop para abrir archivos
+  setupDragAndDrop() {
+    const editor = document.getElementById('editor');
+    const dropZone = document.getElementById('dropZone');
+    const editorContainer = document.querySelector('.editor');
+    if (!editor || !editorContainer) return;
+
+    let dragCounter = 0;
+
+    editorContainer.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      dragCounter++;
+      if (dropZone) dropZone.classList.remove('hidden');
+    });
+
+    editorContainer.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dragCounter--;
+      if (dragCounter === 0 && dropZone) {
+        dropZone.classList.add('hidden');
+      }
+    });
+
+    editorContainer.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+
+    editorContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragCounter = 0;
+      if (dropZone) dropZone.classList.add('hidden');
+
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        const file = files[0];
+        if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            editor.value = ev.target.result;
+            this.fileManager.currentFilename = file.name;
+            this.fileManager.lastSavedText = ev.target.result;
+            if (this.fileManager.filenameSpan) {
+              this.fileManager.filenameSpan.textContent = file.name;
+            }
+            this.fileManager.saveToLocalStorage();
+            this.fileManager.updateSaveStatus();
+            this.textEditor.updateStats();
+            this.textEditor.updateStatus();
+            CustomModal.toast(`Archivo "${file.name}" abierto correctamente`, 'success');
+          };
+          reader.readAsText(file);
+        } else {
+          CustomModal.alert('Solo se admiten archivos de texto (.txt)', 'Formato no soportado');
+        }
+      }
+    });
+  }
+
+  // Panel de atajos de teclado
+  setupShortcutsPanel() {
+    const helpBtn = document.getElementById('shortcutsHelpBtn');
+    const panel = document.getElementById('shortcutsPanel');
+    const closeBtn = document.getElementById('closeShortcuts');
+
+    if (!helpBtn || !panel) return;
+
+    const togglePanel = () => {
+      panel.classList.toggle('hidden');
+      if (!panel.classList.contains('hidden')) {
+        panel.setAttribute('aria-hidden', 'false');
+        if (closeBtn) closeBtn.focus();
+      } else {
+        panel.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    helpBtn.addEventListener('click', togglePanel);
+    if (closeBtn) closeBtn.addEventListener('click', togglePanel);
+
+    // Cerrar con Escape o clic fuera
+    panel.addEventListener('click', (e) => {
+      if (e.target === panel) togglePanel();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) {
+        togglePanel();
+      }
+    });
+  }
+
+  // Dark mode toggle en header
+  setupDarkModeToggle() {
+    const btn = document.getElementById('darkModeToggle');
+    if (!btn) return;
+
+    // Verificar estado guardado o preferencia del sistema
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Determinar si debe estar en modo oscuro
+    let isDark;
+    if (savedTheme) {
+      isDark = savedTheme === 'dark';
+    } else {
+      isDark = prefersDark;
+    }
+
+    // Aplicar estado inicial
+    if (isDark) {
+      document.body.classList.add('dark-mode');
+      btn.textContent = '☀️';
+      btn.title = 'Cambiar a modo claro';
+    } else {
+      document.body.classList.remove('dark-mode');
+      btn.textContent = '🌙';
+      btn.title = 'Cambiar a modo oscuro';
+    }
+
+    btn.addEventListener('click', () => {
+      const nowDark = document.body.classList.toggle('dark-mode');
+      btn.textContent = nowDark ? '☀️' : '🌙';
+      btn.title = nowDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+
+      // Animación de rotación
+      btn.style.transform = 'rotate(360deg) scale(1.2)';
+      setTimeout(() => {
+        btn.style.transform = '';
+      }, 500);
+    });
+  }
+
+  // Fullscreen toggle
+  setupFullscreen() {
+    const btn = document.getElementById('fullscreenBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        btn.textContent = '⛶';
+        btn.title = 'Salir de pantalla completa';
+      } else {
+        document.exitFullscreen();
+        btn.textContent = '⛶';
+        btn.title = 'Pantalla completa';
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      btn.textContent = document.fullscreenElement ? '⛶' : '⛶';
+    });
+  }
+
+  // Sincronizar indicador de guardado en status bar
+  setupSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    const editor = document.getElementById('editor');
+    if (!indicator || !editor) return;
+
+    const updateIndicator = () => {
+      const hasChanges = this.fileManager.hasUnsavedChanges();
+      if (hasChanges) {
+        indicator.classList.remove('saved');
+        indicator.classList.add('unsaved');
+        indicator.title = 'Cambios sin guardar';
+      } else {
+        indicator.classList.remove('unsaved');
+        indicator.classList.add('saved');
+        indicator.title = 'Todos los cambios guardados';
+      }
+    };
+
+    editor.addEventListener('input', updateIndicator);
+
+    // Observar guardado del archivo (poll cada 2s)
+    setInterval(updateIndicator, 2000);
+  }
 
   // Configurar eventos adicionales
   setupAdditionalEvents() {
@@ -139,10 +358,12 @@ class SimpleNotepadApp {
       }
     });
 
-    // Auto-guardado periódico
+    // Auto-guardado periódico (cada 60 segundos como respaldo)
     setInterval(() => {
-      this.fileManager.saveToLocalStorage();
-    }, 30000); // Cada 30 segundos
+      if (this.fileManager.hasUnsavedChanges()) {
+        this.fileManager.saveToLocalStorage();
+      }
+    }, 60000);
   }
 
   // Método público para actualizar estado (usado por EmojiManager)
@@ -168,7 +389,7 @@ class SimpleNotepadApp {
     }
   }
 
-  // Exportar a PDF
+  // Exportar a PDF usando la ventana de impresión del navegador
   async exportToPDF() {
     try {
       const content = this.textEditor.getContent();
@@ -177,81 +398,78 @@ class SimpleNotepadApp {
         return;
       }
 
-      // Usar html2pdf si está disponible
-      if (typeof html2pdf !== 'undefined') {
-        const element = document.createElement('div');
-        element.innerHTML = `<pre style="font-family: monospace; white-space: pre-wrap; word-wrap: break-word;">${content}</pre>`;
-        
-        const opt = {
-          margin: 1,
-          filename: this.fileManager.getCurrentFilename().replace('.txt', '.pdf'),
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
+      const filename = this.fileManager.getCurrentFilename().replace(/\.txt$/i, '');
+      const safeContent = CustomModal.escapeHTML(content);
 
-        await html2pdf().set(opt).from(element).save();
-        CustomModal.toast('PDF exportado correctamente', 'success');
-      } else {
-        // Fallback: generar PDF simple
-        const blob = new Blob([content], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = this.fileManager.getCurrentFilename().replace('.txt', '.pdf');
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        CustomModal.toast('Archivo exportado (requiere conversión manual a PDF)', 'info');
-      }
-    } catch (error) {
-      console.error('Error exportando PDF:', error);
-      CustomModal.error('Error al exportar a PDF', 'Error de Exportación');
-    }
-  }
-
-  // Exportar a Word
-  async exportToWord() {
-    try {
-      const content = this.textEditor.getContent();
-      if (!content.trim()) {
-        CustomModal.alert('No hay contenido para exportar.', 'Exportar Word');
+      // Abrir ventana de impresión con estilos optimizados para PDF
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      if (!printWindow) {
+        CustomModal.alert('El navegador bloqueó la ventana emergente. Permite las ventanas emergentes e intenta de nuevo.', 'Exportar PDF');
         return;
       }
 
-      // Crear contenido HTML básico para Word
-      const htmlContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <title>${this.fileManager.getCurrentFilename()}</title>
-        </head>
-        <body>
-          <pre style="font-family: 'Courier New', monospace; white-space: pre-wrap;">${content}</pre>
-        </body>
-        </html>
-      `;
+      printWindow.document.write(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>${CustomModal.escapeHTML(filename)}</title>
+  <style>
+    @media print {
+      @page { margin: 2cm; size: A4; }
+      body { margin: 0; }
+    }
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #fff;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16pt;
+      color: #334155;
+      border-bottom: 2px solid #4a90e2;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 0;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+    .footer {
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9pt;
+      color: #94a3b8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>${CustomModal.escapeHTML(filename)}</h1>
+  <pre>${safeContent}</pre>
+  <div class="footer">Generado con Simple Notepad — ${new Date().toLocaleDateString('es-ES')}</div>
+</body>
+</html>`);
+      printWindow.document.close();
 
-      const blob = new Blob([htmlContent], { 
-        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
-      });
-      
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = this.fileManager.getCurrentFilename().replace('.txt', '.doc');
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
-      CustomModal.toast('Documento Word exportado correctamente', 'success');
+      // Esperar a que cargue y lanzar impresión
+      printWindow.addEventListener('afterprint', () => printWindow.close());
+      setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+      }, 300);
+
+      CustomModal.toast('Selecciona "Guardar como PDF" en el diálogo de impresión', 'info', 5000);
     } catch (error) {
-      console.error('Error exportando Word:', error);
-      CustomModal.error('Error al exportar a Word', 'Error de Exportación');
+      logger.error('Error exportando PDF:', error);
+      CustomModal.error('Error al exportar a PDF', 'Error de Exportación');
     }
   }
 
@@ -280,7 +498,7 @@ class SimpleNotepadApp {
     }
 
     // Actualizar otros elementos de UI según sea necesario
-    console.log('🔄 UI updated');
+    logger.log('🔄 UI updated');
   }
 
 
@@ -289,11 +507,11 @@ class SimpleNotepadApp {
   debug() {
     // Debug info solo disponible en desarrollo
     if (location.hostname === 'localhost' || location.protocol === 'file:') {
-      console.log('App Info:', this.getAppInfo());
-      console.log('File Manager:', this.fileManager);
-      console.log('Text Editor:', this.textEditor);
-      console.log('UI Manager:', this.uiManager);
-      console.log('Ad Manager:', this.adManager);
+      logger.log('App Info:', this.getAppInfo());
+      logger.log('File Manager:', this.fileManager);
+      logger.log('Text Editor:', this.textEditor);
+      logger.log('UI Manager:', this.uiManager);
+      logger.log('Ad Manager:', this.adManager);
       if (this.adManager) {
         this.adManager.debug();
       }

@@ -48,16 +48,16 @@ header::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--accent-light), var(--accent));
-  box-shadow: var(--shadow-sm);
+  width: 42px;
+  height: 42px;
 }
 
 .logo img {
-  border-radius: var(--radius);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-lg);
   transition: transform var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .logo:hover img {

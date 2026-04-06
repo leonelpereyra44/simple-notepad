@@ -107,3 +107,5 @@ backend/composer.lock
 # Archivos de analytics y tracking locales
 analytics.json
 tracking.json
+
+roadmap.md

@@ -3,6 +3,8 @@
  * Maneja la funcionalidad del editor de texto y estadísticas
  */
 
+import CustomModal from './modals.js';
+
 class TextEditor {
   constructor() {
     this.editor = null;
@@ -52,7 +54,6 @@ class TextEditor {
     this.editor.addEventListener('input', () => {
       this.updateStats();
       this.updateStatus();
-      this.saveToLocalStorage();
     });
 
     // Atajos de teclado
@@ -389,10 +390,10 @@ class TextEditor {
   }
 
   // Buscar texto
-  findText() {
+  async findText() {
     if (!this.editor) return;
     
-    const searchTerm = prompt('Buscar:');
+    const searchTerm = await CustomModal.prompt('Introduce el texto a buscar:', '', 'Buscar');
     if (!searchTerm) return;
     
     const text = this.editor.value;
@@ -402,40 +403,56 @@ class TextEditor {
       this.editor.focus();
       this.editor.setSelectionRange(index, index + searchTerm.length);
     } else {
-      alert('Texto no encontrado');
+      CustomModal.alert('Texto no encontrado.', 'Buscar');
     }
   }
 
   // Reemplazar texto
-  replaceText() {
+  async replaceText() {
     if (!this.editor) return;
     
-    const searchTerm = prompt('Buscar:');
+    const searchTerm = await CustomModal.prompt('Texto a buscar:', '', 'Buscar y Reemplazar');
     if (!searchTerm) return;
     
-    const replaceTerm = prompt('Reemplazar con:');
+    const replaceTerm = await CustomModal.prompt('Reemplazar con:', '', 'Reemplazar');
     if (replaceTerm === null) return;
     
     const text = this.editor.value;
     const regex = new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    const matches = text.match(regex);
     const newText = text.replace(regex, replaceTerm);
     
-    this.editor.value = newText;
-    this.updateStats();
-    this.updateStatus();
+    if (matches && matches.length > 0) {
+      this.editor.value = newText;
+      this.updateStats();
+      this.updateStatus();
+      this.editor.dispatchEvent(new Event('input', { bubbles: true }));
+      CustomModal.toast(`${matches.length} coincidencia(s) reemplazada(s)`, 'success');
+    } else {
+      CustomModal.alert('No se encontraron coincidencias.', 'Reemplazar');
+    }
   }
 
-  // Deshacer/rehacer (básico)
+  // Deshacer - usa inputEvent nativo del textarea (Ctrl+Z manejado por el navegador)
   undo() {
-    document.execCommand('undo');
-    this.updateStats();
-    this.updateStatus();
+    // Ejecutar undo nativo del navegador vía execCommand como fallback.
+    // Los navegadores modernos manejan Ctrl+Z nativamente en textareas,
+    // este método es un respaldo para atajos custom.
+    if (this.editor) {
+      this.editor.focus();
+      document.execCommand('undo', false, null);
+      this.updateStats();
+      this.updateStatus();
+    }
   }
 
   redo() {
-    document.execCommand('redo');
-    this.updateStats();
-    this.updateStatus();
+    if (this.editor) {
+      this.editor.focus();
+      document.execCommand('redo', false, null);
+      this.updateStats();
+      this.updateStatus();
+    }
   }
 
   // Seleccionar todo

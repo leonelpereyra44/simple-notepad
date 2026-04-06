@@ -1,34 +1,23 @@
 /* --- Logo mejorado --- */
 .logo {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 700;
-  box-shadow: var(--shadow);
   transition: all var(--transition);
-  position: relative;
-  overflow: hidden;
 }
 
-.logo::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: rotate(45deg);
-  transition: transform var(--transition-slow);
+.logo img {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition);
 }
 
-.logo:hover::before {
-  transform: rotate(45deg) translate(50%, 50%);
+.logo:hover img {
+  transform: scale(1.08);
 }
 
 /* --- Botón hamburguesa mejorado --- */

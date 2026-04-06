@@ -4,11 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
   
-  <!-- Cache Control -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  
   <!-- SEO Fundamentals -->
   <title>Bloc de Notas Online Gratuito | Editor de Texto Simple y Rápido</title>
   <meta name="description" content="Bloc de notas online gratuito para crear, editar y guardar archivos .txt. Editor de texto simple, sin instalación, compatible con todos los dispositivos. ¡Pruébalo ahora!" />
@@ -26,10 +21,11 @@
   <link rel="alternate" hreflang="x-default" href="https://asimplenotepad.com/" />
   
   <!-- Favicons and Icons -->
-  <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/icons8-bloc-parakeet-color-16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/icons8-bloc-parakeet-color-32.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="media/favicon/icons8-bloc-parakeet-color-96.png" />
-  <link rel="apple-touch-icon" sizes="96x96" href="media/favicon/icons8-bloc-parakeet-color-96.png" />
+  <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png" />
+  <link rel="manifest" href="media/site.webmanifest" />
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#4a90e2" />
@@ -128,10 +124,10 @@
   <meta property="og:description" content="Editor de texto online gratuito para crear y editar archivos .txt. Sin instalación, compatible con todos los dispositivos. ¡Pruébalo ahora!" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://asimplenotepad.com/" />
-  <meta property="og:image" content="https://asimplenotepad.com/media/favicon/icons8-bloc-parakeet-color-96.png" />
+  <meta property="og:image" content="https://asimplenotepad.com/media/asimplenotepadLogo.png" />
   <meta property="og:image:alt" content="Bloc de Notas Online - Editor de texto gratuito" />
-  <meta property="og:image:width" content="96" />
-  <meta property="og:image:height" content="96" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
   <meta property="og:site_name" content="A Simple Notepad" />
   <meta property="og:locale" content="es_ES" />
   <meta property="article:author" content="Leonel Pereyra" />
@@ -140,7 +136,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bloc de Notas Online Gratuito | Editor de Texto Simple" />
   <meta name="twitter:description" content="Editor de texto online gratuito para crear y editar archivos .txt. Sin instalación, compatible con todos los dispositivos." />
-  <meta name="twitter:image" content="https://asimplenotepad.com/media/favicon/icons8-bloc-parakeet-color-96.png" />
+  <meta name="twitter:image" content="https://asimplenotepad.com/media/asimplenotepadLogo.png" />
   <meta name="twitter:image:alt" content="Bloc de Notas Online - Editor de texto gratuito" />
   <meta name="twitter:creator" content="@leonelpereyra" />
   
@@ -148,7 +144,6 @@
   <meta name="generator" content="HTML5" />
   <meta name="rating" content="general" />
   <meta name="distribution" content="global" />
-  <meta name="revisit-after" content="7 days" />
   <meta name="language" content="Spanish" />
 
   <!-- Estilos con carga bloqueante para evitar FOUC -->
@@ -158,17 +153,26 @@
 </head>
 
 <body itemscope itemtype="https://schema.org/WebApplication">
+  <!-- Skip link para accesibilidad -->
+  <a href="#editor" class="skip-link">Ir al editor</a>
+
   <div class="app" role="application">
     <header>
       <div class="logo">
-        <img src="media/favicon/icons8-bloc-parakeet-color-32.png" alt="Bloc de Notas Online - Editor de texto gratuito" width="32" height="32" loading="eager">
+        <img src="media/asimplenotepadLogo.png" alt="Bloc de Notas Online - Editor de texto gratuito" width="42" height="42" loading="eager">
       </div>
-      <div>
+      <div class="header-text">
         <h1 itemprop="name">Bloc de Notas Online Gratuito</h1>
         <div class="small" itemprop="description">Editor de texto simple para archivos .txt - Sin instalación</div>
       </div>
-
-
+      <div class="header-actions">
+        <button id="darkModeToggle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar entre modo claro y oscuro">
+          🌙
+        </button>
+        <button id="fullscreenBtn" class="icon-btn" title="Pantalla completa" aria-label="Activar pantalla completa">
+          ⛶
+        </button>
+      </div>
     </header>
 
     <div class="toolbar">
@@ -210,8 +214,54 @@
       </div>
     </div>
 
+    <!-- Barra de herramientas secundaria -->
+    <div class="secondary-toolbar" role="toolbar" aria-label="Herramientas de edición">
+      <div class="toolbar-group">
+        <button id="undoBtn" class="tool-btn" title="Deshacer (Ctrl+Z)" aria-label="Deshacer">
+          ↩️
+        </button>
+        <button id="redoBtn" class="tool-btn" title="Rehacer (Ctrl+Y)" aria-label="Rehacer">
+          ↪️
+        </button>
+        <span class="toolbar-divider"></span>
+        <button id="findBtn" class="tool-btn" title="Buscar (Ctrl+F)" aria-label="Buscar texto">
+          🔍
+        </button>
+        <button id="replaceBtn" class="tool-btn" title="Buscar y reemplazar (Ctrl+Shift+F)" aria-label="Buscar y reemplazar">
+          🔄
+        </button>
+      </div>
+      <div class="toolbar-group">
+        <button id="duplicateBtn" class="tool-btn" title="Duplicar línea (Ctrl+Shift+D)" aria-label="Duplicar línea">
+          📋
+        </button>
+        <button id="deleteLineBtn" class="tool-btn" title="Eliminar línea (Ctrl+Shift+K)" aria-label="Eliminar línea">
+          🗑️
+        </button>
+        <button id="commentBtn" class="tool-btn" title="Comentar/descomentar (Ctrl+/)" aria-label="Comentar línea">
+          💬
+        </button>
+        <span class="toolbar-divider"></span>
+        <button id="exportPdfBtn" class="tool-btn" title="Exportar a PDF" aria-label="Exportar a PDF">
+          📑 PDF
+        </button>
+      </div>
+      <div class="toolbar-group">
+        <button id="shortcutsHelpBtn" class="tool-btn" title="Atajos de teclado" aria-label="Ver atajos de teclado">
+          ⌨️
+        </button>
+      </div>
+    </div>
+
     <main class="editor" role="main" aria-label="Editor de texto principal">
-      <textarea id="editor" placeholder="Escribe tu texto aquí..." spellcheck="false" aria-label="Área de edición de texto" rows="20"></textarea>
+      <!-- Zona de drag & drop -->
+      <div id="dropZone" class="drop-zone hidden" aria-hidden="true">
+        <div class="drop-zone-content">
+          <span class="drop-icon">📂</span>
+          <p>Suelta tu archivo .txt aquí</p>
+        </div>
+      </div>
+      <textarea id="editor" placeholder="Escribe tu texto aquí...&#10;&#10;💡 Consejo: Usa Ctrl+S para guardar, Ctrl+O para abrir archivos.&#10;Arrastra y suelta archivos .txt directamente en el editor." spellcheck="false" aria-label="Área de edición de texto" rows="20"></textarea>
     </main>
     
     <!-- Panel de Emojis -->
@@ -236,8 +286,17 @@
     </div>
     
     <div class="status-bar">
-      <div id="statusInfo">Línea 1, Columna 1</div>
-      <div class="char-counter">Caracteres: <span id="charCount">0</span></div>
+      <div class="status-left">
+        <span id="saveIndicator" class="save-indicator saved" title="Todos los cambios guardados">●</span>
+        <span id="statusInfo">Línea 1, Columna 1</span>
+      </div>
+      <div class="status-right">
+        <span class="status-stat" title="Palabras">📝 <span id="wordCount">0</span> palabras</span>
+        <span class="status-divider">|</span>
+        <span class="status-stat" title="Líneas">📄 <span id="lineCount">1</span> líneas</span>
+        <span class="status-divider">|</span>
+        <span class="status-stat" title="Caracteres">🔤 <span id="charCount">0</span> chars</span>
+      </div>
     </div>
 
     <footer>
@@ -295,19 +354,9 @@
           </div>
         </div>
 
-        <p><small><em>Última actualización: septiembre 2025.</em></small></p>
+        <p><small><em>Última actualización: abril 2026.</em></small></p>
       </section>
 
-      <!-- Espacio publicitario - Banner horizontal -->
-      <div class="ad-container" style="text-align: center; margin: 2rem 0; padding: 1rem;">
-        <ins class="adsbygoogle ad-banner"
-             style="display:block"
-             data-ad-client="ca-pub-5996058227168327"
-             data-ad-slot="9061177037"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-      
       <!-- Enlaces de navegación -->
       <div class="site-navigation">
         <div class="nav-section">
@@ -334,25 +383,15 @@
         <div class="nav-section">
           <h4>🔗 Enlaces</h4>
           <nav>
-            <a href="https://github.com/leonelpereyra44/simple-notepad" target="_blank" rel="noopener">
+            <a href="https://github.com/leonelpereyra44/simple-notepad" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
           </nav>
         </div>
       </div>
 
-      <!-- Espacio publicitario - Banner footer -->
-      <div class="ad-container" style="text-align: center; margin: 2rem 0; padding: 1rem;">
-        <ins class="adsbygoogle ad-footer"
-             style="display:block"
-             data-ad-client="ca-pub-5996058227168327"
-             data-ad-slot="8814313767"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-      
       <div class="footer-bottom">
-        <p>&copy; 2025 Simple Notepad. Todos los derechos reservados.</p>
+        <p>&copy; 2025-2026 Simple Notepad. Todos los derechos reservados.</p>
         <nav>
           <a href="index.html">Inicio</a>
           <a href="tutorial.html">Tutorial</a>
@@ -362,13 +401,14 @@
           <a href="contact.html">Contacto</a>
           <a href="terms.html">Términos</a>
           <a href="about.html">Acerca</a>
+          <a href="author.html">Autor</a>
         </nav>
       </div>
     </footer>
   </div>
   
   <!-- Breadcrumbs for better navigation -->
-  <nav aria-label="Breadcrumb" style="display: none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <nav aria-label="Breadcrumb" class="sr-only" itemscope itemtype="https://schema.org/BreadcrumbList">
     <ol>
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
         <a itemprop="item" href="/">
@@ -382,6 +422,42 @@
       </li>
     </ol>
   </nav>
+
+  <!-- Panel de atajos de teclado -->
+  <div id="shortcutsPanel" class="shortcuts-panel hidden" role="dialog" aria-label="Atajos de teclado">
+    <div class="shortcuts-content">
+      <div class="shortcuts-header">
+        <h3>⌨️ Atajos de Teclado</h3>
+        <button id="closeShortcuts" class="shortcuts-close" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="shortcuts-grid">
+        <div class="shortcut-group">
+          <h4>📁 Archivos</h4>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>N</kbd> <span>Nuevo archivo</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>O</kbd> <span>Abrir archivo</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>S</kbd> <span>Guardar</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> <span>Guardar como</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>R</kbd> <span>Renombrar</span></div>
+        </div>
+        <div class="shortcut-group">
+          <h4>✏️ Edición</h4>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Z</kbd> <span>Deshacer</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Y</kbd> <span>Rehacer</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>A</kbd> <span>Seleccionar todo</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>F</kbd> <span>Buscar</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> <span>Reemplazar</span></div>
+        </div>
+        <div class="shortcut-group">
+          <h4>📝 Líneas</h4>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> <span>Duplicar línea</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>K</kbd> <span>Eliminar línea</span></div>
+          <div class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>/</kbd> <span>Comentar</span></div>
+          <div class="shortcut-item"><kbd>Tab</kbd> <span>Indentar</span></div>
+          <div class="shortcut-item"><kbd>Shift</kbd>+<kbd>Tab</kbd> <span>Des-indentar</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Contenedor para modales -->
   <div id="modal-container" aria-hidden="true"></div>
@@ -401,97 +477,13 @@
     </div>
   </div>
 
-  <!-- Scripts con carga optimizada -->
-  <script type="module" src="scripts/app.js?v=2.0.0"></script>
-  
-  <!-- Cookie Banner Script -->
-  <script>
-    (function() {
-      const COOKIE_CONSENT = 'cookie_consent';
-      const banner = document.getElementById('cookieBanner');
-      const acceptBtn = document.getElementById('acceptCookies');
-      const rejectBtn = document.getElementById('rejectCookies');
+  <!-- Scripts globales (no-module) — deben cargarse antes del módulo principal -->
+  <script src="scripts/modules/emojiManager.js?v=2.0.0"></script>
+  <script src="scripts/modules/adManager.js?v=2.0.0"></script>
+  <script src="scripts/modules/cookieManager.js?v=2.0.0"></script>
 
-      // Verificar si ya se dio consentimiento
-      function checkCookieConsent() {
-        const consent = localStorage.getItem(COOKIE_CONSENT);
-        if (!consent) {
-          showBanner();
-        } else if (consent === 'accepted') {
-          loadAnalytics();
-        }
-      }
-
-      // Mostrar banner
-      function showBanner() {
-        banner.style.display = 'block';
-        setTimeout(() => {
-          banner.classList.add('show');
-        }, 100);
-      }
-
-      // Ocultar banner
-      function hideBanner() {
-        banner.classList.remove('show');
-        setTimeout(() => {
-          banner.style.display = 'none';
-        }, 300);
-      }
-
-      // Cargar Google Analytics y AdSense
-      function loadAnalytics() {
-        // Google Analytics
-        const gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID';
-        document.head.appendChild(gaScript);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR-GA-ID', { 
-          anonymize_ip: true,
-          cookie_expires: 63072000 // 2 años
-        });
-
-        console.log('📊 Analytics cargado con consentimiento');
-      }
-
-      // Aceptar cookies
-      acceptBtn.addEventListener('click', () => {
-        localStorage.setItem(COOKIE_CONSENT, 'accepted');
-        hideBanner();
-        loadAnalytics();
-      });
-
-      // Rechazar cookies
-      rejectBtn.addEventListener('click', () => {
-        localStorage.setItem(COOKIE_CONSENT, 'rejected');
-        hideBanner();
-        console.log('🍪 Cookies de seguimiento rechazadas');
-      });
-
-      // Inicializar al cargar la página
-      document.addEventListener('DOMContentLoaded', checkCookieConsent);
-    })();
-  </script>
-  
-  <!-- Módulos de la aplicación -->
-  <script src="scripts/modules/emojiManager.js?v=1.0.0"></script>
-  <script src="scripts/modules/adManager.js?v=1.0.0"></script>
-  <script src="scripts/modules/ui.js?v=1.2.0"></script>
-  <script src="scripts/modules/fileManager.js?v=1.4.0"></script>
-  <script src="scripts/modules/modals.js?v=1.1.0"></script>
-  <script src="scripts/modules/cookieManager.js?v=1.0.0"></script>
-  <script src="scripts/app.js?v=2.1.0"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.AdManager) {
-        window.adManager = new AdManager();
-        window.adManager.initialize();
-      }
-    });
-  </script>
+  <!-- Aplicación principal (ES Module) -->
+  <script type="module" src="scripts/app.js?v=2.1.0"></script>
   
   <!-- Service Worker para PWA (opcional) -->
   <script>

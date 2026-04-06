@@ -153,7 +153,7 @@ class UIManager {
 
   // Actualizar texto del toggle de tema
   updateThemeToggle(isDark) {
-    const darkModeElement = this.menuItems.darkMode;
+    const darkModeElement = document.getElementById('darkModeToggle');
     if (darkModeElement) {
       darkModeElement.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
     }
